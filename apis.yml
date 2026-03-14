@@ -52,6 +52,14 @@ apis:
         url: https://linkerd.io/2-edge/reference/cli/viz/
       - type: OpenAPI
         url: openapi/linkerd-viz-metrics-openapi.yml
+      - type: JSONSchema
+        url: json-schema/stat-summary.json
+      - type: JSONSchema
+        url: json-schema/edge.json
+      - type: JSONSchema
+        url: json-schema/gateway.json
+      - type: JSONLD
+        url: json-ld/linkerd-context.jsonld
     tags:
       - Metrics
       - Observability
@@ -71,6 +79,10 @@ apis:
         url: https://linkerd.io/2-edge/reference/cli/viz/
       - type: OpenAPI
         url: openapi/linkerd-tap-openapi.yml
+      - type: JSONSchema
+        url: json-schema/tap-event.json
+      - type: JSONLD
+        url: json-ld/linkerd-context.jsonld
     tags:
       - Tap
       - Traffic Inspection

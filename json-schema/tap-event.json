@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/linkerd/blob/main/json-schema/tap-event.json",
+  "title": "Linkerd Tap Event",
+  "description": "A real-time traffic event captured by the Linkerd Tap API, containing source and destination metadata, proxy direction, and HTTP request/response details.",
+  "type": "object",
+  "properties": {
+    "source": {
+      "$ref": "#/$defs/TcpAddress",
+      "description": "Source TCP address of the request."
+    },
+    "source_meta": {
+      "type": "object",
+      "description": "Metadata labels for the source workload.",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "destination": {
+      "$ref": "#/$defs/TcpAddress",
+      "description": "Destination TCP address of the request."
+    },
+    "destination_meta": {
+      "type": "object",
+      "description": "Metadata labels for the destination workload.",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "route_meta": {
+      "type": "object",
+      "description": "Metadata labels for the matched route.",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "proxy_direction": {
+      "type": "string",
+      "description": "Direction of the proxied request.",
+      "enum": ["INBOUND", "OUTBOUND"]
+    },
+    "request_init": {
+      "type": "object",
+      "description": "Initial request metadata when a new request begins.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique stream identifier for this request."
+        },
+        "method": {
+          "type": "string",
+          "description": "HTTP method of the request."
+        },
+        "scheme": {
+          "type": "string",
+          "description": "URI scheme (http or https)."
+        },
+        "authority": {
+          "type": "string",
+          "description": "Authority (Host header) of the request."
+        },
+        "path": {
+          "type": "string",
+          "description": "Request path."
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "HTTP request headers."
+        }
+      }
+    },
+    "response_init": {
+      "type": "object",
+      "description": "Initial response metadata when headers are received.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique stream identifier matching the request."
+        },
+        "http_status": {
+          "type": "integer",
+          "description": "HTTP response status code."
+        },
+        "latency_ns": {
+          "type": "integer",
+          "description": "Time to first response byte in nanoseconds."
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "HTTP response headers."
+        }
+      }
+    },
+    "response_end": {
+      "type": "object",
+      "description": "Final response metadata when the stream completes.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique stream identifier matching the request."
+        },
+        "grpc_status": {
+          "type": "integer",
+          "description": "gRPC status code if applicable."
+        },
+        "duration_ns": {
+          "type": "integer",
+          "description": "Total stream duration in nanoseconds."
+        },
+        "response_bytes": {
+          "type": "integer",
+          "description": "Total response body bytes."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "TcpAddress": {
+      "type": "object",
+      "description": "A TCP address consisting of an IP and port.",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "description": "IP address."
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number."
+        }
+      }
+    }
+  }
+}

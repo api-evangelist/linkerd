@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/linkerd/blob/main/json-schema/stat-summary.json",
+  "title": "Linkerd Stat Summary",
+  "description": "Aggregated golden metrics for a Kubernetes resource including request rate, success rate, and latency percentiles as returned by the Linkerd Viz Metrics API.",
+  "type": "object",
+  "properties": {
+    "ok": {
+      "type": "object",
+      "description": "Successful response containing stat tables.",
+      "properties": {
+        "stat_tables": {
+          "type": "array",
+          "description": "Array of stat tables grouped by pod group.",
+          "items": {
+            "$ref": "#/$defs/StatTable"
+          }
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Error message."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "StatTable": {
+      "type": "object",
+      "description": "A table of stat rows grouped by pod group.",
+      "properties": {
+        "pod_group": {
+          "type": "object",
+          "properties": {
+            "rows": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/StatTableRow"
+              }
+            }
+          }
+        }
+      }
+    },
+    "StatTableRow": {
+      "type": "object",
+      "description": "A single row of metrics for a Kubernetes resource.",
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/Resource"
+        },
+        "time_window": {
+          "type": "string",
+          "description": "Time window for the aggregated metrics."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the resource."
+        },
+        "meshed_pod_count": {
+          "type": "integer",
+          "description": "Number of pods in the mesh."
+        },
+        "running_pod_count": {
+          "type": "integer",
+          "description": "Number of running pods."
+        },
+        "failed_pod_count": {
+          "type": "integer",
+          "description": "Number of failed pods."
+        },
+        "stats": {
+          "$ref": "#/$defs/BasicStats"
+        },
+        "tcp_stats": {
+          "$ref": "#/$defs/TcpStats"
+        }
+      }
+    },
+    "BasicStats": {
+      "type": "object",
+      "description": "Golden metrics for request traffic.",
+      "properties": {
+        "success_count": {
+          "type": "integer",
+          "description": "Number of successful requests."
+        },
+        "failure_count": {
+          "type": "integer",
+          "description": "Number of failed requests."
+        },
+        "latency_ms_p50": {
+          "type": "number",
+          "description": "50th percentile latency in milliseconds."
+        },
+        "latency_ms_p95": {
+          "type": "number",
+          "description": "95th percentile latency in milliseconds."
+        },
+        "latency_ms_p99": {
+          "type": "number",
+          "description": "99th percentile latency in milliseconds."
+        },
+        "actual_success_count": {
+          "type": "integer",
+          "description": "Actual number of successful requests (before retries)."
+        },
+        "actual_failure_count": {
+          "type": "integer",
+          "description": "Actual number of failed requests (before retries)."
+        }
+      }
+    },
+    "TcpStats": {
+      "type": "object",
+      "description": "TCP-level connection statistics.",
+      "properties": {
+        "open_connections": {
+          "type": "integer",
+          "description": "Number of currently open TCP connections."
+        },
+        "read_bytes_total": {
+          "type": "integer",
+          "description": "Total bytes read."
+        },
+        "write_bytes_total": {
+          "type": "integer",
+          "description": "Total bytes written."
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "A Kubernetes resource reference.",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes namespace."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type (e.g., deployment, pod, service)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        }
+      }
+    }
+  }
+}

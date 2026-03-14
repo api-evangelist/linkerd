@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/linkerd/blob/main/json-schema/edge.json",
+  "title": "Linkerd Edge",
+  "description": "An observed connection edge between two meshed Kubernetes resources, including mTLS identity information.",
+  "type": "object",
+  "properties": {
+    "src": {
+      "$ref": "#/$defs/Resource",
+      "description": "Source resource of the connection."
+    },
+    "dst": {
+      "$ref": "#/$defs/Resource",
+      "description": "Destination resource of the connection."
+    },
+    "client_id": {
+      "type": "string",
+      "description": "TLS client identity of the source."
+    },
+    "server_id": {
+      "type": "string",
+      "description": "TLS server identity of the destination."
+    },
+    "no_identity_msg": {
+      "type": "string",
+      "description": "Reason for missing mTLS identity, if applicable."
+    }
+  },
+  "$defs": {
+    "Resource": {
+      "type": "object",
+      "description": "A Kubernetes resource reference.",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes namespace."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type (e.g., deployment, pod, service)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        }
+      }
+    }
+  }
+}

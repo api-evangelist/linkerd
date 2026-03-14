@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/linkerd/blob/main/json-schema/gateway.json",
+  "title": "Linkerd Gateway",
+  "description": "A multicluster gateway entry with alive status, paired service count, and latency metrics.",
+  "type": "object",
+  "properties": {
+    "namespace": {
+      "type": "string",
+      "description": "Kubernetes namespace of the gateway."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the gateway."
+    },
+    "cluster_name": {
+      "type": "string",
+      "description": "Name of the remote cluster."
+    },
+    "paired_services": {
+      "type": "integer",
+      "description": "Number of services paired through this gateway."
+    },
+    "alive": {
+      "type": "boolean",
+      "description": "Whether the gateway is currently alive and reachable."
+    },
+    "latency_ms_p50": {
+      "type": "number",
+      "description": "50th percentile latency in milliseconds."
+    },
+    "latency_ms_p95": {
+      "type": "number",
+      "description": "95th percentile latency in milliseconds."
+    },
+    "latency_ms_p99": {
+      "type": "number",
+      "description": "99th percentile latency in milliseconds."
+    }
+  }
+}

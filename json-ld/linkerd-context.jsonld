@@ -1,0 +1,81 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "linkerd": "https://linkerd.io/2-edge/reference/",
+    "TapEvent": {
+      "@id": "linkerd:cli/viz/",
+      "@context": {
+        "source": "https://schema.org/sender",
+        "source_meta": "https://schema.org/additionalProperty",
+        "destination": "https://schema.org/recipient",
+        "destination_meta": "https://schema.org/additionalProperty",
+        "route_meta": "https://schema.org/additionalProperty",
+        "proxy_direction": "https://schema.org/direction",
+        "request_init": "https://schema.org/potentialAction",
+        "response_init": "https://schema.org/result",
+        "response_end": "https://schema.org/result",
+        "method": "https://schema.org/httpMethod",
+        "path": "https://schema.org/urlTemplate",
+        "authority": "https://schema.org/hostingOrganization",
+        "http_status": "https://schema.org/statusCode",
+        "latency_ns": "https://schema.org/duration",
+        "duration_ns": "https://schema.org/duration",
+        "labels": "https://schema.org/keywords"
+      }
+    },
+    "StatSummary": {
+      "@id": "linkerd:cli/viz/",
+      "@context": {
+        "resource": "https://schema.org/about",
+        "time_window": "https://schema.org/duration",
+        "status": "https://schema.org/status",
+        "meshed_pod_count": "https://schema.org/quantity",
+        "running_pod_count": "https://schema.org/quantity",
+        "failed_pod_count": "https://schema.org/quantity",
+        "success_count": "https://schema.org/quantity",
+        "failure_count": "https://schema.org/quantity",
+        "latency_ms_p50": "https://schema.org/duration",
+        "latency_ms_p95": "https://schema.org/duration",
+        "latency_ms_p99": "https://schema.org/duration"
+      }
+    },
+    "Edge": {
+      "@id": "linkerd:cli/viz/",
+      "@context": {
+        "src": "https://schema.org/sender",
+        "dst": "https://schema.org/recipient",
+        "client_id": "https://schema.org/identifier",
+        "server_id": "https://schema.org/identifier",
+        "no_identity_msg": "https://schema.org/description"
+      }
+    },
+    "Gateway": {
+      "@id": "linkerd:cli/viz/",
+      "@context": {
+        "namespace": "https://schema.org/isPartOf",
+        "name": "https://schema.org/name",
+        "cluster_name": "https://schema.org/name",
+        "paired_services": "https://schema.org/quantity",
+        "alive": "https://schema.org/status",
+        "latency_ms_p50": "https://schema.org/duration",
+        "latency_ms_p95": "https://schema.org/duration",
+        "latency_ms_p99": "https://schema.org/duration"
+      }
+    },
+    "Resource": {
+      "@id": "linkerd:cli/viz/",
+      "@context": {
+        "namespace": "https://schema.org/isPartOf",
+        "type": "https://schema.org/category",
+        "name": "https://schema.org/name"
+      }
+    },
+    "TcpAddress": {
+      "@id": "linkerd:proxy-configuration/",
+      "@context": {
+        "ip": "https://schema.org/identifier",
+        "port": "https://schema.org/identifier"
+      }
+    }
+  }
+}
