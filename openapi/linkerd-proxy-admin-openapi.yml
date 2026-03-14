@@ -1,0 +1,100 @@
+openapi: 3.1.0
+info:
+  title: Linkerd Proxy Admin API
+  description: >-
+    The Linkerd proxy exposes an admin HTTP server on each meshed pod,
+    providing health check endpoints, readiness probes, Prometheus-compatible
+    metrics, and runtime diagnostic information. By default this server
+    listens on port 4191.
+  version: 2.x
+  contact:
+    name: Linkerd
+    url: https://linkerd.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Linkerd Proxy Configuration Reference
+  url: https://linkerd.io/2-edge/reference/proxy-configuration/
+servers:
+  - url: http://localhost:4191
+    description: Linkerd proxy admin server (default port)
+paths:
+  /metrics:
+    get:
+      operationId: getProxyMetrics
+      summary: Get proxy metrics
+      description: >-
+        Returns Prometheus-compatible metrics for the Linkerd proxy,
+        including request counts, latency histograms, TCP connection
+        statistics, and TLS handshake information.
+      tags:
+        - Metrics
+      responses:
+        '200':
+          description: Prometheus-formatted metrics
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Prometheus exposition format metrics
+  /ready:
+    get:
+      operationId: getProxyReadiness
+      summary: Proxy readiness check
+      description: >-
+        Returns the readiness status of the Linkerd proxy. Used by
+        Kubernetes as a readiness probe to determine if the proxy
+        is ready to accept traffic.
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Proxy is ready
+          content:
+            text/plain:
+              schema:
+                type: string
+        '503':
+          description: Proxy is not ready
+  /live:
+    get:
+      operationId: getProxyLiveness
+      summary: Proxy liveness check
+      description: >-
+        Returns the liveness status of the Linkerd proxy. Used by
+        Kubernetes as a liveness probe to determine if the proxy
+        process is alive.
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Proxy is alive
+          content:
+            text/plain:
+              schema:
+                type: string
+  /shutdown:
+    post:
+      operationId: shutdownProxy
+      summary: Initiate proxy shutdown
+      description: >-
+        Triggers a graceful shutdown of the Linkerd proxy. This endpoint
+        is used during pod termination to ensure the proxy drains
+        connections before exiting.
+      tags:
+        - Lifecycle
+      responses:
+        '200':
+          description: Shutdown initiated
+          content:
+            text/plain:
+              schema:
+                type: string
+tags:
+  - name: Metrics
+    description: Prometheus metrics endpoints
+  - name: Health
+    description: Health and readiness check endpoints
+  - name: Lifecycle
+    description: Proxy lifecycle management endpoints

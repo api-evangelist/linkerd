@@ -1,0 +1,417 @@
+openapi: 3.1.0
+info:
+  title: Linkerd Viz Metrics API
+  description: >-
+    The Linkerd Viz extension provides a metrics API that powers the
+    linkerd viz CLI commands and the Linkerd dashboard. It queries
+    Prometheus for golden metrics including request volume, success
+    rate, and latency distributions for HTTP, HTTP/2, and gRPC traffic
+    across meshed workloads.
+  version: 2.x
+  contact:
+    name: Linkerd
+    url: https://linkerd.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Linkerd Viz CLI Reference
+  url: https://linkerd.io/2-edge/reference/cli/viz/
+servers:
+  - url: http://metrics-api.linkerd-viz.svc.cluster.local:8085
+    description: Linkerd Viz Metrics API service (in-cluster)
+paths:
+  /api/v1/stat:
+    post:
+      operationId: getStatSummary
+      summary: Get stat summary for resources
+      description: >-
+        Returns aggregated metrics (request rate, success rate, latency
+        percentiles) for the specified Kubernetes resources. This powers
+        the linkerd viz stat command. Supports deployments, pods,
+        namespaces, services, replicasets, statefulsets, daemonsets,
+        cronjobs, jobs, and replicationcontrollers.
+      tags:
+        - Statistics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatSummaryRequest'
+      responses:
+        '200':
+          description: Stat summary response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatSummaryResponse'
+        '500':
+          description: Internal server error
+  /api/v1/top-routes:
+    post:
+      operationId: getTopRoutes
+      summary: Get top routes for a resource
+      description: >-
+        Returns per-route metrics for the specified resource. Requires
+        a ServiceProfile to be defined for the service receiving
+        requests. This powers the linkerd viz routes command.
+      tags:
+        - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TopRoutesRequest'
+      responses:
+        '200':
+          description: Top routes response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopRoutesResponse'
+        '500':
+          description: Internal server error
+  /api/v1/edges:
+    post:
+      operationId: getEdges
+      summary: Get edges between resources
+      description: >-
+        Returns the observed edges (connections) between meshed
+        resources, including information about mTLS status. This
+        powers the linkerd viz edges command.
+      tags:
+        - Edges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdgesRequest'
+      responses:
+        '200':
+          description: Edges response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgesResponse'
+        '500':
+          description: Internal server error
+  /api/v1/gateways:
+    post:
+      operationId: getGateways
+      summary: Get multicluster gateway metrics
+      description: >-
+        Returns metrics for multicluster gateways including alive
+        status, latency, and number of paired services.
+      tags:
+        - Gateways
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewaysRequest'
+      responses:
+        '200':
+          description: Gateways response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewaysResponse'
+        '500':
+          description: Internal server error
+  /ready:
+    get:
+      operationId: getMetricsApiReadiness
+      summary: Metrics API readiness check
+      description: Returns the readiness status of the metrics API server.
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Service is ready
+        '503':
+          description: Service is not ready
+components:
+  schemas:
+    StatSummaryRequest:
+      type: object
+      properties:
+        resource_type:
+          type: string
+          description: >-
+            The Kubernetes resource type to query metrics for.
+          enum:
+            - deployment
+            - pod
+            - namespace
+            - service
+            - replicaset
+            - statefulset
+            - daemonset
+            - cronjob
+            - job
+            - replicationcontroller
+        resource_name:
+          type: string
+          description: Optional specific resource name to filter by.
+        namespace:
+          type: string
+          description: Kubernetes namespace to scope the query.
+        time_window:
+          type: string
+          description: Time window for aggregation (e.g., 1m, 10m, 1h).
+          default: 1m
+        from_resource_type:
+          type: string
+          description: Filter by source resource type.
+        from_resource_name:
+          type: string
+          description: Filter by source resource name.
+        from_namespace:
+          type: string
+          description: Filter by source namespace.
+        to_resource_type:
+          type: string
+          description: Filter by destination resource type.
+        to_resource_name:
+          type: string
+          description: Filter by destination resource name.
+        to_namespace:
+          type: string
+          description: Filter by destination namespace.
+        tcp_stats:
+          type: boolean
+          description: Include TCP-level statistics.
+      required:
+        - resource_type
+    StatSummaryResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            stat_tables:
+              type: array
+              items:
+                $ref: '#/components/schemas/StatTable'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
+    StatTable:
+      type: object
+      properties:
+        pod_group:
+          type: object
+          properties:
+            rows:
+              type: array
+              items:
+                $ref: '#/components/schemas/StatTableRow'
+    StatTableRow:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Resource'
+        time_window:
+          type: string
+        status:
+          type: string
+        meshed_pod_count:
+          type: integer
+        running_pod_count:
+          type: integer
+        failed_pod_count:
+          type: integer
+        stats:
+          $ref: '#/components/schemas/BasicStats'
+        tcp_stats:
+          $ref: '#/components/schemas/TcpStats'
+    BasicStats:
+      type: object
+      properties:
+        success_count:
+          type: integer
+          format: int64
+        failure_count:
+          type: integer
+          format: int64
+        latency_ms_p50:
+          type: number
+          format: double
+        latency_ms_p95:
+          type: number
+          format: double
+        latency_ms_p99:
+          type: number
+          format: double
+        actual_success_count:
+          type: integer
+          format: int64
+        actual_failure_count:
+          type: integer
+          format: int64
+    TcpStats:
+      type: object
+      properties:
+        open_connections:
+          type: integer
+          format: int64
+        read_bytes_total:
+          type: integer
+          format: int64
+        write_bytes_total:
+          type: integer
+          format: int64
+    Resource:
+      type: object
+      properties:
+        namespace:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+    TopRoutesRequest:
+      type: object
+      properties:
+        resource_type:
+          type: string
+        resource_name:
+          type: string
+        namespace:
+          type: string
+        time_window:
+          type: string
+          default: 1m
+      required:
+        - resource_type
+    TopRoutesResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            routes:
+              type: array
+              items:
+                $ref: '#/components/schemas/RouteTable'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
+    RouteTable:
+      type: object
+      properties:
+        rows:
+          type: array
+          items:
+            type: object
+            properties:
+              route:
+                type: string
+              time_window:
+                type: string
+              authority:
+                type: string
+              stats:
+                $ref: '#/components/schemas/BasicStats'
+    EdgesRequest:
+      type: object
+      properties:
+        resource_type:
+          type: string
+        namespace:
+          type: string
+      required:
+        - resource_type
+    EdgesResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            edges:
+              type: array
+              items:
+                $ref: '#/components/schemas/Edge'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
+    Edge:
+      type: object
+      properties:
+        src:
+          $ref: '#/components/schemas/Resource'
+        dst:
+          $ref: '#/components/schemas/Resource'
+        client_id:
+          type: string
+          description: TLS client identity
+        server_id:
+          type: string
+          description: TLS server identity
+        no_identity_msg:
+          type: string
+          description: Reason for missing mTLS identity
+    GatewaysRequest:
+      type: object
+      properties:
+        time_window:
+          type: string
+          default: 1m
+        gateway_namespace:
+          type: string
+    GatewaysResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            gateways_table:
+              type: object
+              properties:
+                rows:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      namespace:
+                        type: string
+                      name:
+                        type: string
+                      cluster_name:
+                        type: string
+                      paired_services:
+                        type: integer
+                      alive:
+                        type: boolean
+                      latency_ms_p50:
+                        type: number
+                      latency_ms_p95:
+                        type: number
+                      latency_ms_p99:
+                        type: number
+        error:
+          type: object
+          properties:
+            error:
+              type: string
+tags:
+  - name: Statistics
+    description: Resource statistics and golden metrics
+  - name: Routes
+    description: Per-route metrics
+  - name: Edges
+    description: Connection topology between resources
+  - name: Gateways
+    description: Multicluster gateway metrics
+  - name: Health
+    description: Health check endpoints

@@ -1,0 +1,272 @@
+openapi: 3.1.0
+info:
+  title: Linkerd Tap API
+  description: >-
+    The Linkerd Tap API is a Kubernetes aggregated API server that
+    provides real-time streaming access to requests flowing through
+    the Linkerd service mesh. It allows live inspection of HTTP and
+    gRPC traffic including headers, paths, response codes, and
+    latency. Access is controlled via Kubernetes RBAC on the
+    tap.linkerd.io API group.
+  version: v1alpha1
+  contact:
+    name: Linkerd
+    url: https://linkerd.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Linkerd Viz CLI Reference
+  url: https://linkerd.io/2-edge/reference/cli/viz/
+servers:
+  - url: https://kubernetes.default.svc/apis/tap.linkerd.io/v1alpha1
+    description: Linkerd Tap aggregated API server (via Kubernetes API)
+paths:
+  /apis/tap.linkerd.io/v1alpha1:
+    get:
+      operationId: getTapApiResources
+      summary: List Tap API resources
+      description: >-
+        Returns the list of resources available in the tap.linkerd.io
+        API group.
+      tags:
+        - Discovery
+      responses:
+        '200':
+          description: API resource list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                    example: APIResourceList
+                  apiVersion:
+                    type: string
+                    example: v1
+                  groupVersion:
+                    type: string
+                    example: tap.linkerd.io/v1alpha1
+                  resources:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        namespaced:
+                          type: boolean
+                        kind:
+                          type: string
+                        verbs:
+                          type: array
+                          items:
+                            type: string
+  /watch/namespaces/{namespace}/tap:
+    post:
+      operationId: tapNamespace
+      summary: Tap traffic in a namespace
+      description: >-
+        Opens a streaming connection that returns real-time request
+        and response metadata for traffic flowing through meshed
+        pods in the specified namespace.
+      tags:
+        - Tap
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          description: The Kubernetes namespace to tap
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TapByResourceRequest'
+      responses:
+        '200':
+          description: Streaming tap events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TapEvent'
+        '403':
+          description: Forbidden - insufficient RBAC permissions
+  /watch/namespaces/{namespace}/{resource_type}/{resource_name}/tap:
+    post:
+      operationId: tapResource
+      summary: Tap traffic for a specific resource
+      description: >-
+        Opens a streaming connection that returns real-time request
+        and response metadata for traffic flowing through the
+        specified resource.
+      tags:
+        - Tap
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          description: The Kubernetes namespace
+          schema:
+            type: string
+        - name: resource_type
+          in: path
+          required: true
+          description: The Kubernetes resource type (e.g., deployments, pods)
+          schema:
+            type: string
+        - name: resource_name
+          in: path
+          required: true
+          description: The name of the specific resource
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TapByResourceRequest'
+      responses:
+        '200':
+          description: Streaming tap events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TapEvent'
+        '403':
+          description: Forbidden - insufficient RBAC permissions
+components:
+  schemas:
+    TapByResourceRequest:
+      type: object
+      properties:
+        target:
+          type: object
+          description: Target resource to tap
+          properties:
+            resource_type:
+              type: string
+            resource_name:
+              type: string
+            namespace:
+              type: string
+        match:
+          type: object
+          description: Optional match criteria to filter events
+          properties:
+            path:
+              type: string
+              description: Regex to match request paths
+            method:
+              type: string
+              description: HTTP method to match
+              enum:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+                - PATCH
+                - HEAD
+                - OPTIONS
+            authority:
+              type: string
+              description: Authority (Host header) to match
+        max_rps:
+          type: number
+          description: Maximum events per second
+          default: 100
+    TapEvent:
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/TcpAddress'
+        source_meta:
+          type: object
+          properties:
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+        destination:
+          $ref: '#/components/schemas/TcpAddress'
+        destination_meta:
+          type: object
+          properties:
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+        route_meta:
+          type: object
+          properties:
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+        proxy_direction:
+          type: string
+          enum:
+            - INBOUND
+            - OUTBOUND
+        request_init:
+          type: object
+          properties:
+            id:
+              type: string
+            method:
+              type: string
+            scheme:
+              type: string
+            authority:
+              type: string
+            path:
+              type: string
+            headers:
+              type: object
+              additionalProperties:
+                type: string
+        response_init:
+          type: object
+          properties:
+            id:
+              type: string
+            http_status:
+              type: integer
+            latency_ns:
+              type: integer
+              format: int64
+            headers:
+              type: object
+              additionalProperties:
+                type: string
+        response_end:
+          type: object
+          properties:
+            id:
+              type: string
+            grpc_status:
+              type: integer
+            duration_ns:
+              type: integer
+              format: int64
+            response_bytes:
+              type: integer
+              format: int64
+    TcpAddress:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: IP address
+        port:
+          type: integer
+          description: Port number
+tags:
+  - name: Discovery
+    description: API resource discovery
+  - name: Tap
+    description: Real-time traffic inspection

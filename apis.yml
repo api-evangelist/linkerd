@@ -3,31 +3,79 @@ name: Linkerd
 description: >-
   Service mesh without the mess. Linkerd adds security, observability, and
   reliability to any Kubernetes cluster without the complexity of bloat of other
-  meshes. 
+  meshes.
 type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API
+  - Service Mesh
+  - Kubernetes
+  - Observability
+  - Security
+  - mTLS
 created: '2025-08-19'
-modified: '2025-08-19'
+modified: '2026-03-14'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/linkerd/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: linkerd:linkerd
-    name: Linkerd
+  - aid: linkerd:proxy-admin-api
+    name: Linkerd Proxy Admin API
     description: >-
-      Service mesh without the mess. Linkerd adds security, observability, and
-      reliability to any Kubernetes cluster without the complexity of bloat of
-      other meshes. 
-    humanURL: ' https://linkerd.io/'
-    tags:
-      - API
+      The Linkerd proxy exposes an admin HTTP server on each meshed pod,
+      providing health check endpoints, readiness probes, Prometheus-compatible
+      metrics, and runtime diagnostic information. By default this server
+      listens on port 4191.
+    humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
     properties:
       - type: Documentation
-        url: ' https://linkerd.io/'
+        url: https://linkerd.io/2-edge/reference/proxy-configuration/
+      - type: OpenAPI
+        url: openapi/linkerd-proxy-admin-openapi.yml
+    tags:
+      - Proxy
+      - Metrics
+      - Health Check
+      - Prometheus
+  - aid: linkerd:viz-metrics-api
+    name: Linkerd Viz Metrics API
+    description: >-
+      The Linkerd Viz extension provides a metrics API that powers the
+      linkerd viz CLI commands and the Linkerd dashboard. It queries
+      Prometheus for golden metrics including request volume, success
+      rate, and latency distributions for HTTP, HTTP/2, and gRPC traffic
+      across meshed workloads.
+    humanURL: https://linkerd.io/2-edge/reference/cli/viz/
+    properties:
+      - type: Documentation
+        url: https://linkerd.io/2-edge/reference/cli/viz/
+      - type: OpenAPI
+        url: openapi/linkerd-viz-metrics-openapi.yml
+    tags:
+      - Metrics
+      - Observability
+      - Statistics
+      - Dashboard
+  - aid: linkerd:tap-api
+    name: Linkerd Tap API
+    description: >-
+      The Linkerd Tap API is a Kubernetes aggregated API server that
+      provides real-time streaming access to requests flowing through
+      the Linkerd service mesh. It allows live inspection of HTTP and
+      gRPC traffic including headers, paths, response codes, and
+      latency. Access is controlled via Kubernetes RBAC.
+    humanURL: https://linkerd.io/2-edge/reference/cli/viz/
+    properties:
+      - type: Documentation
+        url: https://linkerd.io/2-edge/reference/cli/viz/
+      - type: OpenAPI
+        url: openapi/linkerd-tap-openapi.yml
+    tags:
+      - Tap
+      - Traffic Inspection
+      - Debugging
+      - Real-Time
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
