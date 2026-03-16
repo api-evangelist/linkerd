@@ -15,7 +15,7 @@ tags:
   - Security
   - mTLS
 created: '2025-08-19'
-modified: '2026-03-14'
+modified: '2026-03-16'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/linkerd/refs/heads/main/apis.yml
 specificationVersion: '0.19'
@@ -90,4 +90,4 @@ apis:
       - Real-Time
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
