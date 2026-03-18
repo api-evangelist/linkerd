@@ -27,10 +27,14 @@ apis:
       providing health check endpoints, readiness probes, Prometheus-compatible
       metrics, and runtime diagnostic information. By default this server
       listens on port 4191.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
+    baseURL: http://localhost:4191
     properties:
       - type: Documentation
         url: https://linkerd.io/2-edge/reference/proxy-configuration/
+      - type: Reference
+        url: https://linkerd.io/2-edge/reference/proxy-metrics/
       - type: OpenAPI
         url: openapi/linkerd-proxy-admin-openapi.yml
     tags:
@@ -46,6 +50,7 @@ apis:
       Prometheus for golden metrics including request volume, success
       rate, and latency distributions for HTTP, HTTP/2, and gRPC traffic
       across meshed workloads.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://linkerd.io/2-edge/reference/cli/viz/
     properties:
       - type: Documentation
@@ -73,6 +78,7 @@ apis:
       the Linkerd service mesh. It allows live inspection of HTTP and
       gRPC traffic including headers, paths, response codes, and
       latency. Access is controlled via Kubernetes RBAC.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://linkerd.io/2-edge/reference/cli/viz/
     properties:
       - type: Documentation
@@ -96,6 +102,7 @@ apis:
       plane. It includes the Destination API for service discovery and traffic
       policy, the Identity API for issuing mTLS certificates, and the Inbound
       API for per-port authorization and rate-limiting policies.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://github.com/linkerd/linkerd2-proxy-api
     tags:
       - gRPC
@@ -105,10 +112,32 @@ apis:
     properties:
       - type: Documentation
         url: https://github.com/linkerd/linkerd2-proxy-api
+      - type: Reference
+        url: https://linkerd.io/2-edge/reference/authorization-policy/
       - type: GitHubRepository
         url: https://github.com/linkerd/linkerd2-proxy-api
       - type: JSONSchema
         url: json-schema/service-profile.json
+  - aid: linkerd:multicluster-api
+    name: Linkerd Multicluster API
+    description: >-
+      The Linkerd Multicluster extension provides Kubernetes CRDs and a
+      gateway component that enables transparent, secure cross-cluster service
+      communication. It uses mTLS to authenticate workloads across cluster
+      boundaries within a unified trust domain, allowing services in different
+      clusters to communicate as if they were local.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://linkerd.io/2-edge/features/multicluster/
+    properties:
+      - type: Documentation
+        url: https://linkerd.io/2-edge/features/multicluster/
+      - type: Reference
+        url: https://linkerd.io/2-edge/reference/multicluster/
+    tags:
+      - Multicluster
+      - Federation
+      - mTLS
+      - Kubernetes
 common:
   - type: JSON-LD
     url: json-ld/linkerd-context.jsonld
@@ -134,6 +163,18 @@ common:
     url: https://slack.linkerd.io/
   - type: Support
     url: https://linkerd.buoyant.io/
+  - type: Releases
+    url: https://github.com/linkerd/linkerd2/releases
+  - type: Security
+    url: https://github.com/linkerd/linkerd2/blob/main/SECURITY.md
+  - type: Stack Overflow
+    url: https://stackoverflow.com/questions/tagged/linkerd
+  - type: YouTube
+    url: https://www.youtube.com/@Linkerd
+  - type: Privacy Policy
+    url: https://buoyant.io/privacy-policy
+  - type: Terms of Service
+    url: https://buoyant.io/terms-of-service
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
