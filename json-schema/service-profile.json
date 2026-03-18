@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/linkerd/blob/main/json-schema/service-profile.json",
+  "title": "Linkerd ServiceProfile",
+  "description": "A Linkerd ServiceProfile is a Kubernetes Custom Resource that defines per-route traffic policy for a service. It enables per-route metrics, retries, timeouts, and traffic shaping based on request path and method matching.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": {
+      "type": "string",
+      "description": "The Linkerd ServiceProfile API version.",
+      "enum": ["linkerd.io/v1alpha2"]
+    },
+    "kind": {
+      "type": "string",
+      "description": "The Kubernetes resource kind.",
+      "enum": ["ServiceProfile"]
+    },
+    "metadata": {
+      "$ref": "#/$defs/ObjectMeta"
+    },
+    "spec": {
+      "$ref": "#/$defs/ServiceProfileSpec"
+    }
+  },
+  "$defs": {
+    "ObjectMeta": {
+      "type": "object",
+      "title": "ObjectMeta",
+      "description": "Standard Kubernetes object metadata.",
+      "required": ["name", "namespace"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the ServiceProfile, which must match the DNS name of the service it describes (e.g., my-service.my-namespace.svc.cluster.local)."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The Kubernetes namespace in which the ServiceProfile is created. Must match the namespace of the service."
+        },
+        "labels": {
+          "type": "object",
+          "description": "Arbitrary key-value labels attached to the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Arbitrary key-value annotations attached to the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ServiceProfileSpec": {
+      "type": "object",
+      "title": "ServiceProfileSpec",
+      "description": "The specification for a Linkerd ServiceProfile, defining route matching rules and traffic policies.",
+      "properties": {
+        "routes": {
+          "type": "array",
+          "description": "Ordered list of route definitions. Linkerd matches requests against routes in order and applies the policy of the first matching route.",
+          "items": {
+            "$ref": "#/$defs/RouteSpec"
+          }
+        },
+        "retryBudget": {
+          "$ref": "#/$defs/RetryBudget"
+        }
+      }
+    },
+    "RouteSpec": {
+      "type": "object",
+      "title": "RouteSpec",
+      "description": "Defines a route with a name, condition for matching, and optional traffic policies such as timeout and retry.",
+      "required": ["name", "condition"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable name for the route, used in metrics labels."
+        },
+        "condition": {
+          "$ref": "#/$defs/RequestMatch"
+        },
+        "responseClasses": {
+          "type": "array",
+          "description": "Classification rules that map responses to success or failure for metric purposes.",
+          "items": {
+            "$ref": "#/$defs/ResponseClass"
+          }
+        },
+        "isRetryable": {
+          "type": "boolean",
+          "description": "If true, failed requests on this route are eligible for automatic retry, subject to the retry budget."
+        },
+        "timeout": {
+          "type": "string",
+          "description": "Request timeout for this route in Go duration format (e.g., 250ms, 1s). Overrides any default timeout.",
+          "pattern": "^[0-9]+(ns|us|ms|s|m|h)$"
+        }
+      }
+    },
+    "RequestMatch": {
+      "type": "object",
+      "title": "RequestMatch",
+      "description": "Condition that determines whether an incoming request matches this route. Supports path regex, HTTP method, and boolean combinators.",
+      "properties": {
+        "pathRegex": {
+          "type": "string",
+          "description": "A RE2-compatible regular expression matched against the request path."
+        },
+        "method": {
+          "type": "string",
+          "description": "HTTP method to match.",
+          "enum": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS", "TRACE", "CONNECT"]
+        },
+        "all": {
+          "type": "array",
+          "description": "All of the listed conditions must match (logical AND).",
+          "items": {
+            "$ref": "#/$defs/RequestMatch"
+          }
+        },
+        "any": {
+          "type": "array",
+          "description": "At least one of the listed conditions must match (logical OR).",
+          "items": {
+            "$ref": "#/$defs/RequestMatch"
+          }
+        },
+        "not": {
+          "$ref": "#/$defs/RequestMatch",
+          "description": "The condition must NOT match (logical NOT)."
+        }
+      }
+    },
+    "ResponseClass": {
+      "type": "object",
+      "title": "ResponseClass",
+      "description": "Maps a response matching a condition to a success or failure classification for metrics.",
+      "required": ["condition"],
+      "properties": {
+        "condition": {
+          "$ref": "#/$defs/ResponseMatch"
+        },
+        "isFailure": {
+          "type": "boolean",
+          "description": "If true, responses matching this condition are counted as failures. Defaults to false (success)."
+        }
+      }
+    },
+    "ResponseMatch": {
+      "type": "object",
+      "title": "ResponseMatch",
+      "description": "Condition for matching an HTTP response based on status code range.",
+      "properties": {
+        "status": {
+          "type": "object",
+          "description": "Matches HTTP status codes within a numeric range.",
+          "properties": {
+            "min": {
+              "type": "integer",
+              "description": "Minimum status code (inclusive).",
+              "minimum": 100,
+              "maximum": 599
+            },
+            "max": {
+              "type": "integer",
+              "description": "Maximum status code (inclusive).",
+              "minimum": 100,
+              "maximum": 599
+            }
+          }
+        },
+        "all": {
+          "type": "array",
+          "description": "All conditions must match.",
+          "items": {
+            "$ref": "#/$defs/ResponseMatch"
+          }
+        },
+        "any": {
+          "type": "array",
+          "description": "Any condition must match.",
+          "items": {
+            "$ref": "#/$defs/ResponseMatch"
+          }
+        },
+        "not": {
+          "$ref": "#/$defs/ResponseMatch",
+          "description": "Condition must not match."
+        }
+      }
+    },
+    "RetryBudget": {
+      "type": "object",
+      "title": "RetryBudget",
+      "description": "Controls the overall retry rate for a service to prevent retry storms. Defines what fraction of requests may be retried and a minimum number of retries per second.",
+      "required": ["retryRatio", "minRetriesPerSecond", "ttl"],
+      "properties": {
+        "retryRatio": {
+          "type": "number",
+          "description": "The maximum ratio of retries to original requests. For example, 0.2 allows up to 20% of requests to be retried.",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "minRetriesPerSecond": {
+          "type": "integer",
+          "description": "Minimum number of retries allowed per second regardless of request volume, ensuring retries can occur at low load.",
+          "minimum": 0
+        },
+        "ttl": {
+          "type": "string",
+          "description": "The duration over which the retry budget is calculated (e.g., 10s). Requests older than this are not counted.",
+          "pattern": "^[0-9]+(ns|us|ms|s|m|h)$"
+        }
+      }
+    }
+  }
+}

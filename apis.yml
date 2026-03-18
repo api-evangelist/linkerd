@@ -15,7 +15,7 @@ tags:
   - Security
   - mTLS
 created: '2025-08-19'
-modified: '2026-03-16'
+modified: '2026-03-18'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/linkerd/refs/heads/main/apis.yml
 specificationVersion: '0.19'
@@ -88,6 +88,52 @@ apis:
       - Traffic Inspection
       - Debugging
       - Real-Time
+  - aid: linkerd:proxy-control-plane-api
+    name: Linkerd Proxy Control Plane API
+    description: >-
+      The Linkerd Proxy Control Plane gRPC API defines the protobuf service
+      contracts used by the data-plane proxy to communicate with the control
+      plane. It includes the Destination API for service discovery and traffic
+      policy, the Identity API for issuing mTLS certificates, and the Inbound
+      API for per-port authorization and rate-limiting policies.
+    humanURL: https://github.com/linkerd/linkerd2-proxy-api
+    tags:
+      - gRPC
+      - Control Plane
+      - mTLS
+      - Policy
+    properties:
+      - type: Documentation
+        url: https://github.com/linkerd/linkerd2-proxy-api
+      - type: GitHubRepository
+        url: https://github.com/linkerd/linkerd2-proxy-api
+      - type: JSONSchema
+        url: json-schema/service-profile.json
+common:
+  - type: JSON-LD
+    url: json-ld/linkerd-context.jsonld
+  - type: JSONSchema
+    url: json-schema/service-profile.json
+  - type: Website
+    url: https://linkerd.io/
+  - type: Documentation
+    url: https://linkerd.io/2.19/reference/
+  - type: Getting Started
+    url: https://linkerd.io/2.19/getting-started/
+  - type: GitHub Organization
+    url: https://github.com/linkerd
+  - type: GitHubRepository
+    url: https://github.com/linkerd/linkerd2
+  - type: Blog
+    url: https://linkerd.io/blog/
+  - type: Change Log
+    url: https://github.com/linkerd/linkerd2/blob/main/CHANGES.md
+  - type: Community
+    url: https://linkerd.io/community/get-involved/
+  - type: Slack
+    url: https://slack.linkerd.io/
+  - type: Support
+    url: https://linkerd.buoyant.io/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
