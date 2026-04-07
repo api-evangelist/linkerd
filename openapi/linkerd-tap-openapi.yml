@@ -25,7 +25,7 @@ paths:
   /apis/tap.linkerd.io/v1alpha1:
     get:
       operationId: getTapApiResources
-      summary: List Tap API resources
+      summary: Linkerd List Tap API resources
       description: >-
         Returns the list of resources available in the tap.linkerd.io
         API group.
@@ -66,7 +66,7 @@ paths:
   /watch/namespaces/{namespace}/tap:
     post:
       operationId: tapNamespace
-      summary: Tap traffic in a namespace
+      summary: Linkerd Tap traffic in a namespace
       description: >-
         Opens a streaming connection that returns real-time request
         and response metadata for traffic flowing through meshed
@@ -98,7 +98,7 @@ paths:
   /watch/namespaces/{namespace}/{resource_type}/{resource_name}/tap:
     post:
       operationId: tapResource
-      summary: Tap traffic for a specific resource
+      summary: Linkerd Tap traffic for a specific resource
       description: >-
         Opens a streaming connection that returns real-time request
         and response metadata for traffic flowing through the

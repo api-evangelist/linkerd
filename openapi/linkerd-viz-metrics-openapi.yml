@@ -24,7 +24,7 @@ paths:
   /api/v1/stat:
     post:
       operationId: getStatSummary
-      summary: Get stat summary for resources
+      summary: Linkerd Get stat summary for resources
       description: >-
         Returns aggregated metrics (request rate, success rate, latency
         percentiles) for the specified Kubernetes resources. This powers
@@ -51,7 +51,7 @@ paths:
   /api/v1/top-routes:
     post:
       operationId: getTopRoutes
-      summary: Get top routes for a resource
+      summary: Linkerd Get top routes for a resource
       description: >-
         Returns per-route metrics for the specified resource. Requires
         a ServiceProfile to be defined for the service receiving
@@ -76,7 +76,7 @@ paths:
   /api/v1/edges:
     post:
       operationId: getEdges
-      summary: Get edges between resources
+      summary: Linkerd Get edges between resources
       description: >-
         Returns the observed edges (connections) between meshed
         resources, including information about mTLS status. This
@@ -101,7 +101,7 @@ paths:
   /api/v1/gateways:
     post:
       operationId: getGateways
-      summary: Get multicluster gateway metrics
+      summary: Linkerd Get multicluster gateway metrics
       description: >-
         Returns metrics for multicluster gateways including alive
         status, latency, and number of paired services.
@@ -125,7 +125,7 @@ paths:
   /ready:
     get:
       operationId: getMetricsApiReadiness
-      summary: Metrics API readiness check
+      summary: Linkerd Metrics API readiness check
       description: Returns the readiness status of the metrics API server.
       tags:
         - Health

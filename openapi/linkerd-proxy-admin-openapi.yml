@@ -23,7 +23,7 @@ paths:
   /metrics:
     get:
       operationId: getProxyMetrics
-      summary: Get proxy metrics
+      summary: Linkerd Get proxy metrics
       description: >-
         Returns Prometheus-compatible metrics for the Linkerd proxy,
         including request counts, latency histograms, TCP connection
@@ -41,7 +41,7 @@ paths:
   /ready:
     get:
       operationId: getProxyReadiness
-      summary: Proxy readiness check
+      summary: Linkerd Proxy readiness check
       description: >-
         Returns the readiness status of the Linkerd proxy. Used by
         Kubernetes as a readiness probe to determine if the proxy
@@ -60,7 +60,7 @@ paths:
   /live:
     get:
       operationId: getProxyLiveness
-      summary: Proxy liveness check
+      summary: Linkerd Proxy liveness check
       description: >-
         Returns the liveness status of the Linkerd proxy. Used by
         Kubernetes as a liveness probe to determine if the proxy
@@ -77,7 +77,7 @@ paths:
   /shutdown:
     post:
       operationId: shutdownProxy
-      summary: Initiate proxy shutdown
+      summary: Linkerd Initiate proxy shutdown
       description: >-
         Triggers a graceful shutdown of the Linkerd proxy. This endpoint
         is used during pod termination to ensure the proxy drains
