@@ -405,13 +405,13 @@ components:
             error:
               type: string
 tags:
-  - name: Statistics
-    description: Resource statistics and golden metrics
-  - name: Routes
-    description: Per-route metrics
   - name: Edges
     description: Connection topology between resources
   - name: Gateways
     description: Multicluster gateway metrics
   - name: Health
     description: Health check endpoints
+  - name: Routes
+    description: Per-route metrics
+  - name: Statistics
+    description: Resource statistics and golden metrics

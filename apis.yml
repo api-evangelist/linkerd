@@ -9,11 +9,11 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Service Mesh
   - Kubernetes
+  - mTLS
   - Observability
   - Security
-  - mTLS
+  - Service Mesh
 created: '2025-08-19'
 modified: '2026-03-18'
 url: >-
@@ -38,10 +38,10 @@ apis:
       - type: OpenAPI
         url: openapi/linkerd-proxy-admin-openapi.yml
     tags:
-      - Proxy
-      - Metrics
       - Health Check
+      - Metrics
       - Prometheus
+      - Proxy
   - aid: linkerd:viz-metrics-api
     name: Linkerd Viz Metrics API
     description: >-
@@ -66,10 +66,10 @@ apis:
       - type: JSONLD
         url: json-ld/linkerd-context.jsonld
     tags:
+      - Dashboard
       - Metrics
       - Observability
       - Statistics
-      - Dashboard
   - aid: linkerd:tap-api
     name: Linkerd Tap API
     description: >-
@@ -90,10 +90,10 @@ apis:
       - type: JSONLD
         url: json-ld/linkerd-context.jsonld
     tags:
-      - Tap
-      - Traffic Inspection
       - Debugging
       - Real-Time
+      - Tap
+      - Traffic Inspection
   - aid: linkerd:proxy-control-plane-api
     name: Linkerd Proxy Control Plane API
     description: >-
@@ -105,8 +105,8 @@ apis:
     image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     humanURL: https://github.com/linkerd/linkerd2-proxy-api
     tags:
-      - gRPC
       - Control Plane
+      - gRPC
       - mTLS
       - Policy
     properties:
@@ -134,10 +134,10 @@ apis:
       - type: Reference
         url: https://linkerd.io/2-edge/reference/multicluster/
     tags:
-      - Multicluster
       - Federation
-      - mTLS
       - Kubernetes
+      - mTLS
+      - Multicluster
 common:
   - type: JSON-LD
     url: json-ld/linkerd-context.jsonld

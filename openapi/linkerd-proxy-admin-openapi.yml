@@ -92,9 +92,9 @@ paths:
               schema:
                 type: string
 tags:
-  - name: Metrics
-    description: Prometheus metrics endpoints
   - name: Health
     description: Health and readiness check endpoints
   - name: Lifecycle
     description: Proxy lifecycle management endpoints
+  - name: Metrics
+    description: Prometheus metrics endpoints
