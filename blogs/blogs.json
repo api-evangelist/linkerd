@@ -1,0 +1,13 @@
+{
+  "repo": "linkerd",
+  "feeds": [
+    {
+      "source": "https://linkerd.io/blog/",
+      "feed_url": "https://linkerd.io/blog/feed.xml",
+      "saved": 10,
+      "title": "Blog | Linkerd"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:30:33Z"
+}
