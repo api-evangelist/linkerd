@@ -1,0 +1,153 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Linkerd Proxy Admin API
+  description: The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness
+    probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
+  tags:
+  - Linkerd
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: linkerd
+    baseUri: http://localhost:4191
+    description: Linkerd Proxy Admin API HTTP API.
+    resources:
+    - name: metrics
+      path: /metrics
+      operations:
+      - name: getproxymetrics
+        method: GET
+        description: Linkerd Get proxy metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ready
+      path: /ready
+      operations:
+      - name: getproxyreadiness
+        method: GET
+        description: Linkerd Proxy readiness check
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: live
+      path: /live
+      operations:
+      - name: getproxyliveness
+        method: GET
+        description: Linkerd Proxy liveness check
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: shutdown
+      path: /shutdown
+      operations:
+      - name: shutdownproxy
+        method: POST
+        description: Linkerd Initiate proxy shutdown
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: linkerd-rest
+    description: REST adapter for Linkerd Proxy Admin API.
+    resources:
+    - path: /metrics
+      name: getproxymetrics
+      operations:
+      - method: GET
+        name: getproxymetrics
+        description: Linkerd Get proxy metrics
+        call: linkerd.getproxymetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /ready
+      name: getproxyreadiness
+      operations:
+      - method: GET
+        name: getproxyreadiness
+        description: Linkerd Proxy readiness check
+        call: linkerd.getproxyreadiness
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /live
+      name: getproxyliveness
+      operations:
+      - method: GET
+        name: getproxyliveness
+        description: Linkerd Proxy liveness check
+        call: linkerd.getproxyliveness
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /shutdown
+      name: shutdownproxy
+      operations:
+      - method: POST
+        name: shutdownproxy
+        description: Linkerd Initiate proxy shutdown
+        call: linkerd.shutdownproxy
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: linkerd-mcp
+    transport: http
+    description: MCP adapter for Linkerd Proxy Admin API for AI agent use.
+    tools:
+    - name: getproxymetrics
+      description: Linkerd Get proxy metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: linkerd.getproxymetrics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getproxyreadiness
+      description: Linkerd Proxy readiness check
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: linkerd.getproxyreadiness
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getproxyliveness
+      description: Linkerd Proxy liveness check
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: linkerd.getproxyliveness
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: shutdownproxy
+      description: Linkerd Initiate proxy shutdown
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: linkerd.shutdownproxy
+      outputParameters:
+      - type: object
+        mapping: $.
