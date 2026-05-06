@@ -4,157 +4,127 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Linkerd
 providerId: linkerd
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Kubernetes
   - mTLS
   - Observability
   - Security
   - Service Mesh
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: Linkerd is a CNCF-graduated open-source service mesh. The OSS edition is free under Apache
+  2.0. Production-grade hardened distribution and commercial support are offered by Buoyant under "Buoyant
+  Enterprise for Linkerd" (BEL). BEL has three commercial tiers — Basic, Premium, Strategic — plus a
+  free tier for evaluation and for companies under 50 employees. Pricing is not publicly listed; sales
+  contact required.
+sources:
+  - https://linkerd.io
+  - https://buoyant.io/enterprise
+  - https://buoyant.io/pricing
 plans:
-  - id: linkerd-free
-    name: Free
+  - id: linkerd-oss
+    name: Linkerd (Open Source)
     type: freemium
-    description: Free entry tier for the Linkerd API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: CNCF-graduated open-source service mesh under Apache License 2.0. Includes proxy, control
+      plane, mTLS, multi-cluster, viz extension. Community support via Slack, GitHub, and Linkerd Forum.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - http://localhost:4191
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - http://localhost:4191
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Linkerd Proxy Admin API
-      - name: Linkerd Viz Metrics API
-      - name: Linkerd Tap API
-      - name: Linkerd Proxy Control Plane API
-      - name: Linkerd Multicluster API
-  - id: linkerd-pro
-    name: Professional
-    type: paid
-    description: Production tier for Linkerd. Provides higher quotas, priority support, and access to
-      the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - http://localhost:4191
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - http://localhost:4191
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
+      - label: Apache 2.0 License
+        name: oss_license
+        type: flat
+        metric: cluster
         limit: -1
-        timeFrame: month
+        timeFrame: usage
         geo: global
-        domains:
-          - http://localhost:4191
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '0.00'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
+      - name: Open Source Linkerd
       - name: Linkerd Proxy Admin API
-      - name: Linkerd Viz Metrics API
-      - name: Linkerd Tap API
-      - name: Linkerd Proxy Control Plane API
-      - name: Linkerd Multicluster API
-  - id: linkerd-enterprise
-    name: Enterprise
+      - name: Linkerd Destination API
+      - name: Linkerd Identity API
+      - name: Community Support (Slack, GitHub, Linkerd Forum)
+  - id: linkerd-bel-free
+    name: Buoyant Enterprise for Linkerd — Free
+    type: freemium
+    description: Buoyant's hardened, FIPS-capable distribution of Linkerd. Always free to try at any
+      scale; companies with fewer than 50 employees can run BEL in production for free.
+    entries:
+      - label: Free evaluation / small-company production
+        name: bel_free
+        type: flat
+        metric: cluster
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: BEL Free
+      - name: Hardened distribution
+      - name: Companies under 50 employees may use in production
+  - id: linkerd-bel-basic
+    name: Buoyant Enterprise for Linkerd — Basic
+    type: subscription
+    description: Commercial tier for teams adopting modern platform security, reliability, and observability
+      via the service mesh. Private support ticketing.
+    entries:
+      - label: Basic subscription
+        name: bel_basic
+        type: subscription
+        metric: contract
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Hardened, FIPS-capable BEL distribution
+      - name: Private support ticketing
+      - name: Security hotfixes
+  - id: linkerd-bel-premium
+    name: Buoyant Enterprise for Linkerd — Premium
+    type: subscription
+    description: Commercial tier for companies standardizing on security, high availability, and multi-cluster
+      communication.
+    entries:
+      - label: Premium subscription
+        name: bel_premium
+        type: subscription
+        metric: contract
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Multi-cluster + HA features
+      - name: Private support ticketing
+      - name: Production-grade SLAs
+  - id: linkerd-bel-strategic
+    name: Buoyant Enterprise for Linkerd — Strategic
     type: enterprise
-    description: Custom-negotiated tier for Linkerd. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
+    description: Commercial tier for enterprises with special security, compliance, and additional operational
+      requirements. 24x7 on-call SLAs and 30-day "white glove" onboarding.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Strategic subscription
+        name: bel_strategic
+        type: subscription
+        metric: contract
         limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - http://localhost:4191
+        timeFrame: year
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - http://localhost:4191
-        unit: 1
-        price: custom
+        price: contact sales
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Linkerd Proxy Admin API
-      - name: Linkerd Viz Metrics API
-      - name: Linkerd Tap API
-      - name: Linkerd Proxy Control Plane API
-      - name: Linkerd Multicluster API
+      - name: 24x7 on-call SLA
+      - name: 30-day white-glove onboarding
+      - name: Architecture guidance
+      - name: Compliance / regulated-environment support
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
