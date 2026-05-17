@@ -139,7 +139,7 @@ apis:
       - mTLS
       - Multicluster
 common:
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/linkerd-context.jsonld
   - type: JSONSchema
     url: json-schema/service-profile.json
@@ -147,15 +147,15 @@ common:
     url: https://linkerd.io/
   - type: Documentation
     url: https://linkerd.io/2.19/reference/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://linkerd.io/2.19/getting-started/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/linkerd
   - type: GitHubRepository
     url: https://github.com/linkerd/linkerd2
   - type: Blog
     url: https://linkerd.io/blog/
-  - type: Change Log
+  - type: ChangeLog
     url: https://github.com/linkerd/linkerd2/blob/main/CHANGES.md
   - type: Community
     url: https://linkerd.io/community/get-involved/
@@ -167,13 +167,13 @@ common:
     url: https://github.com/linkerd/linkerd2/releases
   - type: Security
     url: https://github.com/linkerd/linkerd2/blob/main/SECURITY.md
-  - type: Stack Overflow
+  - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/linkerd
   - type: YouTube
     url: https://www.youtube.com/@Linkerd
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://buoyant.io/privacy-policy
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://buoyant.io/terms-of-service
 maintainers:
   - FN: Kin Lane
