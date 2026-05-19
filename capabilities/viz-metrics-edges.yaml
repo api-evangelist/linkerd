@@ -1,0 +1,77 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Linkerd Viz Metrics API — Edges
+  description: 'Linkerd Viz Metrics API — Edges. 1 operations. Lead operation: Linkerd Get edges between resources. Self-contained
+    Naftiko capability covering one Linkerd business surface.'
+  tags:
+  - Linkerd
+  - Edges
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    LINKERD_API_KEY: LINKERD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: viz-metrics-edges
+    baseUri: http://metrics-api.linkerd-viz.svc.cluster.local:8085
+    description: Linkerd Viz Metrics API — Edges business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-edges
+      path: /api/v1/edges
+      operations:
+      - name: getedges
+        method: POST
+        description: Linkerd Get edges between resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: viz-metrics-edges-rest
+    port: 8080
+    description: REST adapter for Linkerd Viz Metrics API — Edges. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/edges
+      name: api-v1-edges
+      description: REST surface for api-v1-edges.
+      operations:
+      - method: POST
+        name: getedges
+        description: Linkerd Get edges between resources
+        call: viz-metrics-edges.getedges
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: viz-metrics-edges-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Linkerd Viz Metrics API — Edges. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: linkerd-get-edges-between-resources
+      description: Linkerd Get edges between resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: viz-metrics-edges.getedges
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

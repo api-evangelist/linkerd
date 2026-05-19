@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Linkerd Tap API — Discovery
+  description: 'Linkerd Tap API — Discovery. 1 operations. Lead operation: Linkerd List Tap API resources. Self-contained
+    Naftiko capability covering one Linkerd business surface.'
+  tags:
+  - Linkerd
+  - Discovery
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    LINKERD_API_KEY: LINKERD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tap-discovery
+    baseUri: https://kubernetes.default.svc/apis/tap.linkerd.io/v1alpha1
+    description: Linkerd Tap API — Discovery business capability. Self-contained, no shared references.
+    resources:
+    - name: apis-tap.linkerd.io-v1alpha1
+      path: /apis/tap.linkerd.io/v1alpha1
+      operations:
+      - name: gettapapiresources
+        method: GET
+        description: Linkerd List Tap API resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: tap-discovery-rest
+    port: 8080
+    description: REST adapter for Linkerd Tap API — Discovery. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/apis/tap-linkerd-io/v1alpha1
+      name: apis-tap-linkerd-io-v1alpha1
+      description: REST surface for apis-tap.linkerd.io-v1alpha1.
+      operations:
+      - method: GET
+        name: gettapapiresources
+        description: Linkerd List Tap API resources
+        call: tap-discovery.gettapapiresources
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tap-discovery-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Linkerd Tap API — Discovery. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: linkerd-list-tap-api-resources
+      description: Linkerd List Tap API resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tap-discovery.gettapapiresources
+      outputParameters:
+      - type: object
+        mapping: $.

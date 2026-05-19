@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Linkerd Proxy Admin API — Metrics
+  description: 'Linkerd Proxy Admin API — Metrics. 1 operations. Lead operation: Linkerd Get proxy metrics. Self-contained
+    Naftiko capability covering one Linkerd business surface.'
+  tags:
+  - Linkerd
+  - Metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    LINKERD_API_KEY: LINKERD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: proxy-admin-metrics
+    baseUri: http://localhost:4191
+    description: Linkerd Proxy Admin API — Metrics business capability. Self-contained, no shared references.
+    resources:
+    - name: metrics
+      path: /metrics
+      operations:
+      - name: getproxymetrics
+        method: GET
+        description: Linkerd Get proxy metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: proxy-admin-metrics-rest
+    port: 8080
+    description: REST adapter for Linkerd Proxy Admin API — Metrics. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/metrics
+      name: metrics
+      description: REST surface for metrics.
+      operations:
+      - method: GET
+        name: getproxymetrics
+        description: Linkerd Get proxy metrics
+        call: proxy-admin-metrics.getproxymetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: proxy-admin-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Linkerd Proxy Admin API — Metrics. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: linkerd-get-proxy-metrics
+      description: Linkerd Get proxy metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-admin-metrics.getproxymetrics
+      outputParameters:
+      - type: object
+        mapping: $.
