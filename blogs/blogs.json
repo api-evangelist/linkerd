@@ -2,12 +2,20 @@
   "repo": "linkerd",
   "feeds": [
     {
-      "source": "https://linkerd.io/blog/",
+      "source": "https://linkerd.io/blog/feed.xml",
       "feed_url": "https://linkerd.io/blog/feed.xml",
-      "title": "Blog | Linkerd",
-      "saved": 4
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://github.com/linkerd/linkerd2",
+      "feed_url": "https://github.com/linkerd/linkerd2",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 14,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 15,
+  "fetched": "2026-06-01T23:35:02Z"
 }
