@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Linkerd Viz Metrics API",
+    "version": "2.x"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Get stat summary for resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://metrics-api.linkerd-viz.svc.cluster.local:8085/api/v1/stat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns aggregated metrics (request rate, success rate, latency percentiles) for the specified Kubernetes resources. This powers the linkerd viz stat command. Supports deployments, pods, namespaces, services, replicasets, statefulsets, daemonsets, cronjobs, jobs, and replicationcontrollers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Get top routes for a resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://metrics-api.linkerd-viz.svc.cluster.local:8085/api/v1/top-routes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns per-route metrics for the specified resource. Requires a ServiceProfile to be defined for the service receiving requests. This powers the linkerd viz routes command."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Edges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Get edges between resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://metrics-api.linkerd-viz.svc.cluster.local:8085/api/v1/edges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the observed edges (connections) between meshed resources, including information about mTLS status. This powers the linkerd viz edges command."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Gateways",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Get multicluster gateway metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://metrics-api.linkerd-viz.svc.cluster.local:8085/api/v1/gateways",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns metrics for multicluster gateways including alive status, latency, and number of paired services."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Metrics API readiness check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://metrics-api.linkerd-viz.svc.cluster.local:8085/ready"
+          },
+          "docs": "Returns the readiness status of the metrics API server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

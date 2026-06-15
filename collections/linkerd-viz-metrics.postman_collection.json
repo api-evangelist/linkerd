@@ -1,0 +1,699 @@
+{
+  "item": [
+    {
+      "id": "c60f38ec-480d-4a7c-86be-a3763b8e003d",
+      "name": "Edges",
+      "description": {
+        "content": "Connection topology between resources",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a8200afa-269d-4aba-b2d8-3027b9d88e79",
+          "name": "Linkerd Get edges between resources",
+          "request": {
+            "name": "Linkerd Get edges between resources",
+            "description": {
+              "content": "Returns the observed edges (connections) between meshed resources, including information about mTLS status. This powers the linkerd viz edges command.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "edges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resource_type\": \"<string>\",\n  \"namespace\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8388f66b-e334-45dc-b333-f3a333072f5e",
+              "name": "Edges response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "edges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"namespace\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": {\n    \"edges\": [\n      {\n        \"src\": {\n          \"namespace\": \"string\",\n          \"type\": \"string\",\n          \"name\": \"string\"\n        },\n        \"dst\": {\n          \"namespace\": \"string\",\n          \"type\": \"string\",\n          \"name\": \"string\"\n        },\n        \"client_id\": \"string\",\n        \"server_id\": \"string\",\n        \"no_identity_msg\": \"string\"\n      },\n      {\n        \"src\": {\n          \"namespace\": \"string\",\n          \"type\": \"string\",\n          \"name\": \"string\"\n        },\n        \"dst\": {\n          \"namespace\": \"string\",\n          \"type\": \"string\",\n          \"name\": \"string\"\n        },\n        \"client_id\": \"string\",\n        \"server_id\": \"string\",\n        \"no_identity_msg\": \"string\"\n      }\n    ]\n  },\n  \"error\": {\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4921bb1-8105-4f35-8732-c6c1714753ed",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "edges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"namespace\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9b1d0692-92ba-4914-85a9-c1d60a3a3ca0",
+      "name": "Gateways",
+      "description": {
+        "content": "Multicluster gateway metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94d6b846-d40d-4848-b953-65b1dc4e0fc4",
+          "name": "Linkerd Get multicluster gateway metrics",
+          "request": {
+            "name": "Linkerd Get multicluster gateway metrics",
+            "description": {
+              "content": "Returns metrics for multicluster gateways including alive status, latency, and number of paired services.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "gateways"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"time_window\": \"1m\",\n  \"gateway_namespace\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0189cd0b-9b99-41ea-8954-3e8402c81a8d",
+              "name": "Gateways response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "gateways"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"time_window\": \"1m\",\n  \"gateway_namespace\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": {\n    \"gateways_table\": {\n      \"rows\": [\n        {\n          \"namespace\": \"string\",\n          \"name\": \"string\",\n          \"cluster_name\": \"string\",\n          \"paired_services\": 3299,\n          \"alive\": true,\n          \"latency_ms_p50\": 2424.8945729566663,\n          \"latency_ms_p95\": 2917.5991852862117,\n          \"latency_ms_p99\": 4973.961595953543\n        },\n        {\n          \"namespace\": \"string\",\n          \"name\": \"string\",\n          \"cluster_name\": \"string\",\n          \"paired_services\": 8396,\n          \"alive\": false,\n          \"latency_ms_p50\": 8884.656088125816,\n          \"latency_ms_p95\": 5037.900995647139,\n          \"latency_ms_p99\": 3633.301003648223\n        }\n      ]\n    }\n  },\n  \"error\": {\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da2dae0d-709a-4a50-8f48-d7cc8b8b6ca0",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "gateways"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"time_window\": \"1m\",\n  \"gateway_namespace\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "46bd5c4d-123e-44f1-82d3-c806875a1a75",
+      "name": "Health",
+      "description": {
+        "content": "Health check endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9462ded2-c16e-4044-8af5-46c5449831bf",
+          "name": "Linkerd Metrics API readiness check",
+          "request": {
+            "name": "Linkerd Metrics API readiness check",
+            "description": {
+              "content": "Returns the readiness status of the metrics API server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ready"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1ba70c7-6797-49a9-a4ba-e2ad63d07629",
+              "name": "Service is ready",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ready"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e4b15b8e-a7ec-42fc-b0ea-b711673813f1",
+              "name": "Service is not ready",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ready"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8557e0ad-5403-4437-be52-7de64376d3fc",
+      "name": "Routes",
+      "description": {
+        "content": "Per-route metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2d85a733-c529-472e-a531-9929a17be10a",
+          "name": "Linkerd Get top routes for a resource",
+          "request": {
+            "name": "Linkerd Get top routes for a resource",
+            "description": {
+              "content": "Returns per-route metrics for the specified resource. Requires a ServiceProfile to be defined for the service receiving requests. This powers the linkerd viz routes command.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "top-routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fb75d972-8e87-4105-b41e-a4a1210ab250",
+              "name": "Top routes response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "top-routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": {\n    \"routes\": [\n      {\n        \"rows\": [\n          {\n            \"route\": \"string\",\n            \"time_window\": \"string\",\n            \"authority\": \"string\",\n            \"stats\": {\n              \"success_count\": 3417,\n              \"failure_count\": 545,\n              \"latency_ms_p50\": 7325.039431222315,\n              \"latency_ms_p95\": 7797.138496554689,\n              \"latency_ms_p99\": 7718.351139885489,\n              \"actual_success_count\": 5970,\n              \"actual_failure_count\": 8141\n            }\n          },\n          {\n            \"route\": \"string\",\n            \"time_window\": \"string\",\n            \"authority\": \"string\",\n            \"stats\": {\n              \"success_count\": 310,\n              \"failure_count\": 2231,\n              \"latency_ms_p50\": 2034.7153098135284,\n              \"latency_ms_p95\": 9020.71003220264,\n              \"latency_ms_p99\": 8223.48077482273,\n              \"actual_success_count\": 9183,\n              \"actual_failure_count\": 4023\n            }\n          }\n        ]\n      },\n      {\n        \"rows\": [\n          {\n            \"route\": \"string\",\n            \"time_window\": \"string\",\n            \"authority\": \"string\",\n            \"stats\": {\n              \"success_count\": 2548,\n              \"failure_count\": 9943,\n              \"latency_ms_p50\": 6157.7434922009115,\n              \"latency_ms_p95\": 9286.958488623146,\n              \"latency_ms_p99\": 6531.133151856517,\n              \"actual_success_count\": 6785,\n              \"actual_failure_count\": 3547\n            }\n          },\n          {\n            \"route\": \"string\",\n            \"time_window\": \"string\",\n            \"authority\": \"string\",\n            \"stats\": {\n              \"success_count\": 6178,\n              \"failure_count\": 4188,\n              \"latency_ms_p50\": 3041.301637558964,\n              \"latency_ms_p95\": 5383.792639134942,\n              \"latency_ms_p99\": 1761.5876466106995,\n              \"actual_success_count\": 8305,\n              \"actual_failure_count\": 4332\n            }\n          }\n        ]\n      }\n    ]\n  },\n  \"error\": {\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "058d2e28-f653-45ad-a468-060139fefd2f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "top-routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e244fab4-21ab-46f9-a8fc-d7a1ccc0fe8c",
+      "name": "Statistics",
+      "description": {
+        "content": "Resource statistics and golden metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "588f7327-a56c-4d77-a3ac-9ab9a4a93456",
+          "name": "Linkerd Get stat summary for resources",
+          "request": {
+            "name": "Linkerd Get stat summary for resources",
+            "description": {
+              "content": "Returns aggregated metrics (request rate, success rate, latency percentiles) for the specified Kubernetes resources. This powers the linkerd viz stat command. Supports deployments, pods, namespaces, services, replicasets, statefulsets, daemonsets, cronjobs, jobs, and replicationcontrollers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "stat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3524f7b6-1ab7-4ed9-8937-c0b3273d8c44",
+              "name": "Stat summary response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "stat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": {\n    \"stat_tables\": [\n      {\n        \"pod_group\": {\n          \"rows\": [\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 1849,\n              \"running_pod_count\": 4224,\n              \"failed_pod_count\": 9557,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 8703,\n              \"running_pod_count\": 7970,\n              \"failed_pod_count\": 396,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"pod_group\": {\n          \"rows\": [\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 5274,\n              \"running_pod_count\": 9439,\n              \"failed_pod_count\": 6007,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 5304,\n              \"running_pod_count\": 5365,\n              \"failed_pod_count\": 3179,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"error\": {\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3075ae89-e744-40ba-9f5a-e0e853a2a463",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "stat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://metrics-api.linkerd-viz.svc.cluster.local:8085",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4812dba1-7085-47d0-894a-2410849884e3",
+    "name": "Linkerd Viz Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Linkerd Viz extension provides a metrics API that powers the linkerd viz CLI commands and the Linkerd dashboard. It queries Prometheus for golden metrics including request volume, success rate, and latency distributions for HTTP, HTTP/2, and gRPC traffic across meshed workloads.\n\nContact Support:\n Name: Linkerd",
+      "type": "text/plain"
+    }
+  }
+}

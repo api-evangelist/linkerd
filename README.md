@@ -1,120 +1,160 @@
 # Linkerd (linkerd)
+
 Service mesh without the mess. Linkerd adds security, observability, and reliability to any Kubernetes cluster without the complexity of bloat of other meshes.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/linkerd/refs/heads/main/apis.yml)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/linkerd/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/linkerd/refs/heads/main/apis.yml)
 
 ## Scope
 
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
 
-## Tags:
+## Tags
 
- - Service Mesh, Kubernetes, Observability, Security, mTLS
+- Kubernetes
+- mTLS
+- Observability
+- Security
+- Service Mesh
 
 ## Timestamps
 
-- **Created:** 2025-08-19 
-- **Modified:** 2026-04-28 
+- **Created:** 2025-08-19
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### Linkerd Proxy Admin API
+
 The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
 
-**Human URL:** [https://linkerd.io/2-edge/reference/proxy-configuration/](https://linkerd.io/2-edge/reference/proxy-configuration/)
+- **Human URL:** [https://linkerd.io/2-edge/reference/proxy-configuration/](https://linkerd.io/2-edge/reference/proxy-configuration/)
+- **Base URL:** `http://localhost:4191`
 
+#### Tags
 
-#### Tags:
-
- - Proxy, Metrics, Health Check, Prometheus
+- Health Check
+- Metrics
+- Prometheus
+- Proxy
 
 #### Properties
 
 - [Documentation](https://linkerd.io/2-edge/reference/proxy-configuration/)
 - [Reference](https://linkerd.io/2-edge/reference/proxy-metrics/)
-- [OpenAPI](openapi/linkerd-proxy-admin-openapi.yml)
+- [OpenAPI](openapi/linkerd-proxy-admin-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/linkerd-proxy-admin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/linkerd-proxy-admin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Linkerd Viz Metrics API
+
 The Linkerd Viz extension provides a metrics API that powers the linkerd viz CLI commands and the Linkerd dashboard. It queries Prometheus for golden metrics including request volume, success rate, and latency distributions for HTTP, HTTP/2, and gRPC traffic across meshed workloads.
 
-**Human URL:** [https://linkerd.io/2-edge/reference/cli/viz/](https://linkerd.io/2-edge/reference/cli/viz/)
+- **Human URL:** [https://linkerd.io/2-edge/reference/cli/viz/](https://linkerd.io/2-edge/reference/cli/viz/)
 
+#### Tags
 
-#### Tags:
-
- - Metrics, Observability, Statistics, Dashboard
+- Dashboard
+- Metrics
+- Observability
+- Statistics
 
 #### Properties
 
 - [Documentation](https://linkerd.io/2-edge/reference/cli/viz/)
-- [OpenAPI](openapi/linkerd-viz-metrics-openapi.yml)
-- [JSONSchema](json-schema/stat-summary.json)
-- [JSONSchema](json-schema/edge.json)
-- [JSONSchema](json-schema/gateway.json)
-- [JSONLD](json-ld/linkerd-context.jsonld)
+- [OpenAPI](openapi/linkerd-viz-metrics-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/linkerd-viz-metrics.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/linkerd-viz-metrics.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [JSON Schema](json-schema/stat-summary.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/edge.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/gateway.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON-LD](json-ld/linkerd-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
 
 ### Linkerd Tap API
+
 The Linkerd Tap API is a Kubernetes aggregated API server that provides real-time streaming access to requests flowing through the Linkerd service mesh. It allows live inspection of HTTP and gRPC traffic including headers, paths, response codes, and latency. Access is controlled via Kubernetes RBAC.
 
-**Human URL:** [https://linkerd.io/2-edge/reference/cli/viz/](https://linkerd.io/2-edge/reference/cli/viz/)
+- **Human URL:** [https://linkerd.io/2-edge/reference/cli/viz/](https://linkerd.io/2-edge/reference/cli/viz/)
 
+#### Tags
 
-#### Tags:
-
- - Tap, Traffic Inspection, Debugging, Real-Time
+- Debugging
+- Real-Time
+- Tap
+- Traffic Inspection
 
 #### Properties
 
 - [Documentation](https://linkerd.io/2-edge/reference/cli/viz/)
-- [OpenAPI](openapi/linkerd-tap-openapi.yml)
-- [JSONSchema](json-schema/tap-event.json)
-- [JSONLD](json-ld/linkerd-context.jsonld)
+- [OpenAPI](openapi/linkerd-tap-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/linkerd-tap.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/linkerd-tap.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [JSON Schema](json-schema/tap-event.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON-LD](json-ld/linkerd-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
 
 ### Linkerd Proxy Control Plane API
+
 The Linkerd Proxy Control Plane gRPC API defines the protobuf service contracts used by the data-plane proxy to communicate with the control plane. It includes the Destination API for service discovery and traffic policy, the Identity API for issuing mTLS certificates, and the Inbound API for per-port authorization and rate-limiting policies.
 
-**Human URL:** [https://github.com/linkerd/linkerd2-proxy-api](https://github.com/linkerd/linkerd2-proxy-api)
+- **Human URL:** [https://github.com/linkerd/linkerd2-proxy-api](https://github.com/linkerd/linkerd2-proxy-api)
 
+#### Tags
 
-#### Tags:
-
- - gRPC, Control Plane, mTLS, Policy
+- Control Plane
+- gRPC
+- mTLS
+- Policy
 
 #### Properties
 
 - [Documentation](https://github.com/linkerd/linkerd2-proxy-api)
 - [Reference](https://linkerd.io/2-edge/reference/authorization-policy/)
-- [GitHubRepository](https://github.com/linkerd/linkerd2-proxy-api)
-- [JSONSchema](json-schema/service-profile.json)
+- [GitHub Repository](https://github.com/linkerd/linkerd2-proxy-api)
+- [JSON Schema](json-schema/service-profile.json) — [JSON Schema](https://json-schema.org/specification)
+- [Postman Collection](collections/linkerd-proxy-admin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/linkerd-proxy-admin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/linkerd-tap.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/linkerd-tap.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/linkerd-viz-metrics.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/linkerd-viz-metrics.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Linkerd Multicluster API
+
 The Linkerd Multicluster extension provides Kubernetes CRDs and a gateway component that enables transparent, secure cross-cluster service communication. It uses mTLS to authenticate workloads across cluster boundaries within a unified trust domain, allowing services in different clusters to communicate as if they were local.
 
-**Human URL:** [https://linkerd.io/2-edge/features/multicluster/](https://linkerd.io/2-edge/features/multicluster/)
+- **Human URL:** [https://linkerd.io/2-edge/features/multicluster/](https://linkerd.io/2-edge/features/multicluster/)
 
+#### Tags
 
-#### Tags:
-
- - Multicluster, Federation, mTLS, Kubernetes
+- Federation
+- Kubernetes
+- mTLS
+- Multicluster
 
 #### Properties
 
 - [Documentation](https://linkerd.io/2-edge/features/multicluster/)
 - [Reference](https://linkerd.io/2-edge/reference/multicluster/)
+- [Postman Collection](collections/linkerd-proxy-admin.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/linkerd-proxy-admin.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/linkerd-tap.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/linkerd-tap.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/linkerd-viz-metrics.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/linkerd-viz-metrics.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
-- [JSON-LD](json-ld/linkerd-context.jsonld)
-- [JSONSchema](json-schema/service-profile.json)
+- [LinkedIn](https://www.linkedin.com/company/linkerd)
+- [JSON-LD](json-ld/linkerd-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [JSON Schema](json-schema/service-profile.json) — [JSON Schema](https://json-schema.org/specification)
 - [Website](https://linkerd.io/)
 - [Documentation](https://linkerd.io/2.19/reference/)
 - [Getting Started](https://linkerd.io/2.19/getting-started/)
 - [GitHub Organization](https://github.com/linkerd)
-- [GitHubRepository](https://github.com/linkerd/linkerd2)
+- [GitHub Repository](https://github.com/linkerd/linkerd2)
 - [Blog](https://linkerd.io/blog/)
-- [Change Log](https://github.com/linkerd/linkerd2/blob/main/CHANGES.md)
+- [Changelog](https://github.com/linkerd/linkerd2/blob/main/CHANGES.md)
 - [Community](https://linkerd.io/community/get-involved/)
 - [Slack](https://slack.linkerd.io/)
 - [Support](https://linkerd.buoyant.io/)
@@ -128,5 +168,4 @@ The Linkerd Multicluster extension provides Kubernetes CRDs and a gateway compon
 ## Maintainers
 
 **FN:** Kin Lane
-
 **Email:** kin@apievangelist.com

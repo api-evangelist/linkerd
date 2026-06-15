@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Linkerd Proxy Admin API",
+    "version": "2.x"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Get proxy metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:4191/metrics"
+          },
+          "docs": "Returns Prometheus-compatible metrics for the Linkerd proxy, including request counts, latency histograms, TCP connection statistics, and TLS handshake information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Proxy readiness check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:4191/ready"
+          },
+          "docs": "Returns the readiness status of the Linkerd proxy. Used by Kubernetes as a readiness probe to determine if the proxy is ready to accept traffic."
+        },
+        {
+          "info": {
+            "name": "Linkerd Proxy liveness check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:4191/live"
+          },
+          "docs": "Returns the liveness status of the Linkerd proxy. Used by Kubernetes as a liveness probe to determine if the proxy process is alive."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Lifecycle",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Initiate proxy shutdown",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:4191/shutdown"
+          },
+          "docs": "Triggers a graceful shutdown of the Linkerd proxy. This endpoint is used during pod termination to ensure the proxy drains connections before exiting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
