@@ -6,7 +6,7 @@ description: >-
 type: Index
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Kubernetes
   - mTLS
@@ -24,7 +24,7 @@ apis:
       The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness
       probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port
       4191.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
     baseURL: http://localhost:4191
     properties:
@@ -45,7 +45,7 @@ apis:
       The Linkerd Viz extension provides a metrics API that powers the linkerd viz CLI commands and the Linkerd
       dashboard. It queries Prometheus for golden metrics including request volume, success rate, and latency
       distributions for HTTP, HTTP/2, and gRPC traffic across meshed workloads.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://linkerd.io/2-edge/reference/cli/viz/
     properties:
       - type: Documentation
@@ -71,7 +71,7 @@ apis:
       The Linkerd Tap API is a Kubernetes aggregated API server that provides real-time streaming access to requests
       flowing through the Linkerd service mesh. It allows live inspection of HTTP and gRPC traffic including headers,
       paths, response codes, and latency. Access is controlled via Kubernetes RBAC.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://linkerd.io/2-edge/reference/cli/viz/
     properties:
       - type: Documentation
@@ -94,7 +94,7 @@ apis:
       communicate with the control plane. It includes the Destination API for service discovery and traffic policy, the
       Identity API for issuing mTLS certificates, and the Inbound API for per-port authorization and rate-limiting
       policies.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://github.com/linkerd/linkerd2-proxy-api
     tags:
       - Control Plane
@@ -116,7 +116,7 @@ apis:
       The Linkerd Multicluster extension provides Kubernetes CRDs and a gateway component that enables transparent,
       secure cross-cluster service communication. It uses mTLS to authenticate workloads across cluster boundaries
       within a unified trust domain, allowing services in different clusters to communicate as if they were local.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://linkerd.io/2-edge/features/multicluster/
     properties:
       - type: Documentation
