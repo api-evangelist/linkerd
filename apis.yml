@@ -155,7 +155,7 @@ common:
     url: https://slack.linkerd.io/
   - type: Support
     url: https://linkerd.buoyant.io/
-  - type: Releases
+  - type: ReleaseNotes
     url: https://github.com/linkerd/linkerd2/releases
   - type: Security
     url: https://github.com/linkerd/linkerd2/blob/main/SECURITY.md
