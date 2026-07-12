@@ -129,6 +129,8 @@ apis:
       - mTLS
       - Multicluster
 common:
+  - type: DomainSecurity
+    url: security/linkerd-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/linkerd
   - type: JSONLD
