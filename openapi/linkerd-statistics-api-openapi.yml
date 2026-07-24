@@ -1,0 +1,184 @@
+openapi: 3.1.0
+info:
+  title: Linkerd Proxy Admin Discovery Statistics API
+  description: The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
+  version: 2.x
+  contact:
+    name: Linkerd
+    url: https://linkerd.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:4191
+  description: Linkerd proxy admin server (default port)
+tags:
+- name: Statistics
+  description: Resource statistics and golden metrics
+paths:
+  /api/v1/stat:
+    post:
+      operationId: getStatSummary
+      summary: Linkerd Get stat summary for resources
+      description: Returns aggregated metrics (request rate, success rate, latency percentiles) for the specified Kubernetes resources. This powers the linkerd viz stat command. Supports deployments, pods, namespaces, services, replicasets, statefulsets, daemonsets, cronjobs, jobs, and replicationcontrollers.
+      tags:
+      - Statistics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatSummaryRequest'
+      responses:
+        '200':
+          description: Stat summary response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatSummaryResponse'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    StatSummaryResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            stat_tables:
+              type: array
+              items:
+                $ref: '#/components/schemas/StatTable'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
+    Resource:
+      type: object
+      properties:
+        namespace:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+    BasicStats:
+      type: object
+      properties:
+        success_count:
+          type: integer
+          format: int64
+        failure_count:
+          type: integer
+          format: int64
+        latency_ms_p50:
+          type: number
+          format: double
+        latency_ms_p95:
+          type: number
+          format: double
+        latency_ms_p99:
+          type: number
+          format: double
+        actual_success_count:
+          type: integer
+          format: int64
+        actual_failure_count:
+          type: integer
+          format: int64
+    StatTable:
+      type: object
+      properties:
+        pod_group:
+          type: object
+          properties:
+            rows:
+              type: array
+              items:
+                $ref: '#/components/schemas/StatTableRow'
+    StatTableRow:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Resource'
+        time_window:
+          type: string
+        status:
+          type: string
+        meshed_pod_count:
+          type: integer
+        running_pod_count:
+          type: integer
+        failed_pod_count:
+          type: integer
+        stats:
+          $ref: '#/components/schemas/BasicStats'
+        tcp_stats:
+          $ref: '#/components/schemas/TcpStats'
+    TcpStats:
+      type: object
+      properties:
+        open_connections:
+          type: integer
+          format: int64
+        read_bytes_total:
+          type: integer
+          format: int64
+        write_bytes_total:
+          type: integer
+          format: int64
+    StatSummaryRequest:
+      type: object
+      properties:
+        resource_type:
+          type: string
+          description: The Kubernetes resource type to query metrics for.
+          enum:
+          - deployment
+          - pod
+          - namespace
+          - service
+          - replicaset
+          - statefulset
+          - daemonset
+          - cronjob
+          - job
+          - replicationcontroller
+        resource_name:
+          type: string
+          description: Optional specific resource name to filter by.
+        namespace:
+          type: string
+          description: Kubernetes namespace to scope the query.
+        time_window:
+          type: string
+          description: Time window for aggregation (e.g., 1m, 10m, 1h).
+          default: 1m
+        from_resource_type:
+          type: string
+          description: Filter by source resource type.
+        from_resource_name:
+          type: string
+          description: Filter by source resource name.
+        from_namespace:
+          type: string
+          description: Filter by source namespace.
+        to_resource_type:
+          type: string
+          description: Filter by destination resource type.
+        to_resource_name:
+          type: string
+          description: Filter by destination resource name.
+        to_namespace:
+          type: string
+          description: Filter by destination namespace.
+        tcp_stats:
+          type: boolean
+          description: Include TCP-level statistics.
+      required:
+      - resource_type
+externalDocs:
+  description: Linkerd Proxy Configuration Reference
+  url: https://linkerd.io/2-edge/reference/proxy-configuration/

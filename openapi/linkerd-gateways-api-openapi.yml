@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: Linkerd Proxy Admin Discovery Gateways API
+  description: The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
+  version: 2.x
+  contact:
+    name: Linkerd
+    url: https://linkerd.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:4191
+  description: Linkerd proxy admin server (default port)
+tags:
+- name: Gateways
+  description: Multicluster gateway metrics
+paths:
+  /api/v1/gateways:
+    post:
+      operationId: getGateways
+      summary: Linkerd Get multicluster gateway metrics
+      description: Returns metrics for multicluster gateways including alive status, latency, and number of paired services.
+      tags:
+      - Gateways
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewaysRequest'
+      responses:
+        '200':
+          description: Gateways response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewaysResponse'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    GatewaysResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            gateways_table:
+              type: object
+              properties:
+                rows:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      namespace:
+                        type: string
+                      name:
+                        type: string
+                      cluster_name:
+                        type: string
+                      paired_services:
+                        type: integer
+                      alive:
+                        type: boolean
+                      latency_ms_p50:
+                        type: number
+                      latency_ms_p95:
+                        type: number
+                      latency_ms_p99:
+                        type: number
+        error:
+          type: object
+          properties:
+            error:
+              type: string
+    GatewaysRequest:
+      type: object
+      properties:
+        time_window:
+          type: string
+          default: 1m
+        gateway_namespace:
+          type: string
+externalDocs:
+  description: Linkerd Proxy Configuration Reference
+  url: https://linkerd.io/2-edge/reference/proxy-configuration/

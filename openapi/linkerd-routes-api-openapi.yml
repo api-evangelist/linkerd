@@ -1,0 +1,114 @@
+openapi: 3.1.0
+info:
+  title: Linkerd Proxy Admin Discovery Routes API
+  description: The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
+  version: 2.x
+  contact:
+    name: Linkerd
+    url: https://linkerd.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:4191
+  description: Linkerd proxy admin server (default port)
+tags:
+- name: Routes
+  description: Per-route metrics
+paths:
+  /api/v1/top-routes:
+    post:
+      operationId: getTopRoutes
+      summary: Linkerd Get top routes for a resource
+      description: Returns per-route metrics for the specified resource. Requires a ServiceProfile to be defined for the service receiving requests. This powers the linkerd viz routes command.
+      tags:
+      - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TopRoutesRequest'
+      responses:
+        '200':
+          description: Top routes response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopRoutesResponse'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    RouteTable:
+      type: object
+      properties:
+        rows:
+          type: array
+          items:
+            type: object
+            properties:
+              route:
+                type: string
+              time_window:
+                type: string
+              authority:
+                type: string
+              stats:
+                $ref: '#/components/schemas/BasicStats'
+    TopRoutesResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            routes:
+              type: array
+              items:
+                $ref: '#/components/schemas/RouteTable'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
+    TopRoutesRequest:
+      type: object
+      properties:
+        resource_type:
+          type: string
+        resource_name:
+          type: string
+        namespace:
+          type: string
+        time_window:
+          type: string
+          default: 1m
+      required:
+      - resource_type
+    BasicStats:
+      type: object
+      properties:
+        success_count:
+          type: integer
+          format: int64
+        failure_count:
+          type: integer
+          format: int64
+        latency_ms_p50:
+          type: number
+          format: double
+        latency_ms_p95:
+          type: number
+          format: double
+        latency_ms_p99:
+          type: number
+          format: double
+        actual_success_count:
+          type: integer
+          format: int64
+        actual_failure_count:
+          type: integer
+          format: int64
+externalDocs:
+  description: Linkerd Proxy Configuration Reference
+  url: https://linkerd.io/2-edge/reference/proxy-configuration/

@@ -1,0 +1,217 @@
+openapi: 3.1.0
+info:
+  title: Linkerd Proxy Admin Discovery Tap API
+  description: The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
+  version: 2.x
+  contact:
+    name: Linkerd
+    url: https://linkerd.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:4191
+  description: Linkerd proxy admin server (default port)
+tags:
+- name: Tap
+  description: Real-time traffic inspection
+paths:
+  /watch/namespaces/{namespace}/tap:
+    post:
+      operationId: tapNamespace
+      summary: Linkerd Tap traffic in a namespace
+      description: Opens a streaming connection that returns real-time request and response metadata for traffic flowing through meshed pods in the specified namespace.
+      tags:
+      - Tap
+      parameters:
+      - name: namespace
+        in: path
+        required: true
+        description: The Kubernetes namespace to tap
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TapByResourceRequest'
+      responses:
+        '200':
+          description: Streaming tap events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TapEvent'
+        '403':
+          description: Forbidden - insufficient RBAC permissions
+  /watch/namespaces/{namespace}/{resource_type}/{resource_name}/tap:
+    post:
+      operationId: tapResource
+      summary: Linkerd Tap traffic for a specific resource
+      description: Opens a streaming connection that returns real-time request and response metadata for traffic flowing through the specified resource.
+      tags:
+      - Tap
+      parameters:
+      - name: namespace
+        in: path
+        required: true
+        description: The Kubernetes namespace
+        schema:
+          type: string
+      - name: resource_type
+        in: path
+        required: true
+        description: The Kubernetes resource type (e.g., deployments, pods)
+        schema:
+          type: string
+      - name: resource_name
+        in: path
+        required: true
+        description: The name of the specific resource
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TapByResourceRequest'
+      responses:
+        '200':
+          description: Streaming tap events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TapEvent'
+        '403':
+          description: Forbidden - insufficient RBAC permissions
+components:
+  schemas:
+    TcpAddress:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: IP address
+        port:
+          type: integer
+          description: Port number
+    TapEvent:
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/TcpAddress'
+        source_meta:
+          type: object
+          properties:
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+        destination:
+          $ref: '#/components/schemas/TcpAddress'
+        destination_meta:
+          type: object
+          properties:
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+        route_meta:
+          type: object
+          properties:
+            labels:
+              type: object
+              additionalProperties:
+                type: string
+        proxy_direction:
+          type: string
+          enum:
+          - INBOUND
+          - OUTBOUND
+        request_init:
+          type: object
+          properties:
+            id:
+              type: string
+            method:
+              type: string
+            scheme:
+              type: string
+            authority:
+              type: string
+            path:
+              type: string
+            headers:
+              type: object
+              additionalProperties:
+                type: string
+        response_init:
+          type: object
+          properties:
+            id:
+              type: string
+            http_status:
+              type: integer
+            latency_ns:
+              type: integer
+              format: int64
+            headers:
+              type: object
+              additionalProperties:
+                type: string
+        response_end:
+          type: object
+          properties:
+            id:
+              type: string
+            grpc_status:
+              type: integer
+            duration_ns:
+              type: integer
+              format: int64
+            response_bytes:
+              type: integer
+              format: int64
+    TapByResourceRequest:
+      type: object
+      properties:
+        target:
+          type: object
+          description: Target resource to tap
+          properties:
+            resource_type:
+              type: string
+            resource_name:
+              type: string
+            namespace:
+              type: string
+        match:
+          type: object
+          description: Optional match criteria to filter events
+          properties:
+            path:
+              type: string
+              description: Regex to match request paths
+            method:
+              type: string
+              description: HTTP method to match
+              enum:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - HEAD
+              - OPTIONS
+            authority:
+              type: string
+              description: Authority (Host header) to match
+        max_rps:
+          type: number
+          description: Maximum events per second
+          default: 100
+externalDocs:
+  description: Linkerd Proxy Configuration Reference
+  url: https://linkerd.io/2-edge/reference/proxy-configuration/

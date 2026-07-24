@@ -1,0 +1,60 @@
+openapi: 3.1.0
+info:
+  title: Linkerd Proxy Admin Discovery API
+  description: The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
+  version: 2.x
+  contact:
+    name: Linkerd
+    url: https://linkerd.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:4191
+  description: Linkerd proxy admin server (default port)
+tags:
+- name: Discovery
+  description: API resource discovery
+paths:
+  /apis/tap.linkerd.io/v1alpha1:
+    get:
+      operationId: getTapApiResources
+      summary: Linkerd List Tap API resources
+      description: Returns the list of resources available in the tap.linkerd.io API group.
+      tags:
+      - Discovery
+      responses:
+        '200':
+          description: API resource list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                    example: APIResourceList
+                  apiVersion:
+                    type: string
+                    example: v1
+                  groupVersion:
+                    type: string
+                    example: tap.linkerd.io/v1alpha1
+                  resources:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        namespaced:
+                          type: boolean
+                        kind:
+                          type: string
+                        verbs:
+                          type: array
+                          items:
+                            type: string
+externalDocs:
+  description: Linkerd Proxy Configuration Reference
+  url: https://linkerd.io/2-edge/reference/proxy-configuration/

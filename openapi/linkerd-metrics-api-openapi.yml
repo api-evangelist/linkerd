@@ -1,0 +1,36 @@
+openapi: 3.1.0
+info:
+  title: Linkerd Proxy Admin Discovery Metrics API
+  description: The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
+  version: 2.x
+  contact:
+    name: Linkerd
+    url: https://linkerd.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:4191
+  description: Linkerd proxy admin server (default port)
+tags:
+- name: Metrics
+  description: Prometheus metrics endpoints
+paths:
+  /metrics:
+    get:
+      operationId: getProxyMetrics
+      summary: Linkerd Get proxy metrics
+      description: Returns Prometheus-compatible metrics for the Linkerd proxy, including request counts, latency histograms, TCP connection statistics, and TLS handshake information.
+      tags:
+      - Metrics
+      responses:
+        '200':
+          description: Prometheus-formatted metrics
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Prometheus exposition format metrics
+externalDocs:
+  description: Linkerd Proxy Configuration Reference
+  url: https://linkerd.io/2-edge/reference/proxy-configuration/

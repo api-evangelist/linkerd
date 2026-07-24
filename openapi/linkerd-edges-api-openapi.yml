@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: Linkerd Proxy Admin Discovery Edges API
+  description: The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
+  version: 2.x
+  contact:
+    name: Linkerd
+    url: https://linkerd.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:4191
+  description: Linkerd proxy admin server (default port)
+tags:
+- name: Edges
+  description: Connection topology between resources
+paths:
+  /api/v1/edges:
+    post:
+      operationId: getEdges
+      summary: Linkerd Get edges between resources
+      description: Returns the observed edges (connections) between meshed resources, including information about mTLS status. This powers the linkerd viz edges command.
+      tags:
+      - Edges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdgesRequest'
+      responses:
+        '200':
+          description: Edges response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgesResponse'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Edge:
+      type: object
+      properties:
+        src:
+          $ref: '#/components/schemas/Resource'
+        dst:
+          $ref: '#/components/schemas/Resource'
+        client_id:
+          type: string
+          description: TLS client identity
+        server_id:
+          type: string
+          description: TLS server identity
+        no_identity_msg:
+          type: string
+          description: Reason for missing mTLS identity
+    Resource:
+      type: object
+      properties:
+        namespace:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+    EdgesRequest:
+      type: object
+      properties:
+        resource_type:
+          type: string
+        namespace:
+          type: string
+      required:
+      - resource_type
+    EdgesResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            edges:
+              type: array
+              items:
+                $ref: '#/components/schemas/Edge'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
+externalDocs:
+  description: Linkerd Proxy Configuration Reference
+  url: https://linkerd.io/2-edge/reference/proxy-configuration/
