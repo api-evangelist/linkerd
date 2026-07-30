@@ -4,9 +4,21 @@ description: >-
   Service mesh without the mess. Linkerd adds security, observability, and reliability to any Kubernetes cluster without
   the complexity of bloat of other meshes.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/linkerd.png
 tags:
   - Kubernetes
   - mTLS
@@ -18,116 +30,282 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/linkerd/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: linkerd:proxy-admin-api
-    name: Linkerd Proxy Admin API
-    description: >-
-      The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness
-      probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port
-      4191.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
-    baseURL: http://localhost:4191
-    properties:
-      - type: Documentation
-        url: https://linkerd.io/2-edge/reference/proxy-configuration/
-      - type: Reference
-        url: https://linkerd.io/2-edge/reference/proxy-metrics/
-      - type: OpenAPI
-        url: openapi/linkerd-proxy-admin-openapi.yml
-    tags:
-      - Health Check
-      - Metrics
-      - Prometheus
-      - Proxy
-  - aid: linkerd:viz-metrics-api
-    name: Linkerd Viz Metrics API
-    description: >-
-      The Linkerd Viz extension provides a metrics API that powers the linkerd viz CLI commands and the Linkerd
-      dashboard. It queries Prometheus for golden metrics including request volume, success rate, and latency
-      distributions for HTTP, HTTP/2, and gRPC traffic across meshed workloads.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://linkerd.io/2-edge/reference/cli/viz/
-    properties:
-      - type: Documentation
-        url: https://linkerd.io/2-edge/reference/cli/viz/
-      - type: OpenAPI
-        url: openapi/linkerd-viz-metrics-openapi.yml
-      - type: JSONSchema
-        url: json-schema/stat-summary.json
-      - type: JSONSchema
-        url: json-schema/edge.json
-      - type: JSONSchema
-        url: json-schema/gateway.json
-      - type: JSONLD
-        url: json-ld/linkerd-context.jsonld
-    tags:
-      - Dashboard
-      - Metrics
-      - Observability
-      - Statistics
-  - aid: linkerd:tap-api
-    name: Linkerd Tap API
-    description: >-
-      The Linkerd Tap API is a Kubernetes aggregated API server that provides real-time streaming access to requests
-      flowing through the Linkerd service mesh. It allows live inspection of HTTP and gRPC traffic including headers,
-      paths, response codes, and latency. Access is controlled via Kubernetes RBAC.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://linkerd.io/2-edge/reference/cli/viz/
-    properties:
-      - type: Documentation
-        url: https://linkerd.io/2-edge/reference/cli/viz/
-      - type: OpenAPI
-        url: openapi/linkerd-tap-openapi.yml
-      - type: JSONSchema
-        url: json-schema/tap-event.json
-      - type: JSONLD
-        url: json-ld/linkerd-context.jsonld
-    tags:
-      - Debugging
-      - Real-Time
-      - Tap
-      - Traffic Inspection
-  - aid: linkerd:proxy-control-plane-api
-    name: Linkerd Proxy Control Plane API
-    description: >-
-      The Linkerd Proxy Control Plane gRPC API defines the protobuf service contracts used by the data-plane proxy to
-      communicate with the control plane. It includes the Destination API for service discovery and traffic policy, the
-      Identity API for issuing mTLS certificates, and the Inbound API for per-port authorization and rate-limiting
-      policies.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://github.com/linkerd/linkerd2-proxy-api
-    tags:
-      - Control Plane
-      - gRPC
-      - mTLS
-      - Policy
-    properties:
-      - type: Documentation
-        url: https://github.com/linkerd/linkerd2-proxy-api
-      - type: Reference
-        url: https://linkerd.io/2-edge/reference/authorization-policy/
-      - type: GitHubRepository
-        url: https://github.com/linkerd/linkerd2-proxy-api
-      - type: JSONSchema
-        url: json-schema/service-profile.json
-  - aid: linkerd:multicluster-api
-    name: Linkerd Multicluster API
-    description: >-
-      The Linkerd Multicluster extension provides Kubernetes CRDs and a gateway component that enables transparent,
-      secure cross-cluster service communication. It uses mTLS to authenticate workloads across cluster boundaries
-      within a unified trust domain, allowing services in different clusters to communicate as if they were local.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://linkerd.io/2-edge/features/multicluster/
-    properties:
-      - type: Documentation
-        url: https://linkerd.io/2-edge/features/multicluster/
-      - type: Reference
-        url: https://linkerd.io/2-edge/reference/multicluster/
-    tags:
-      - Federation
-      - Kubernetes
-      - mTLS
-      - Multicluster
+- aid: linkerd:proxy-control-plane-api
+  name: Linkerd Proxy Control Plane API
+  description: >-
+    The Linkerd Proxy Control Plane gRPC API defines the protobuf service contracts used by the data-plane
+    proxy to communicate with the control plane. It includes the Destination API for service discovery
+    and traffic policy, the Identity API for issuing mTLS certificates, and the Inbound API for per-port
+    authorization and rate-limiting policies.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/linkerd/linkerd2-proxy-api
+  tags:
+  - Control Plane
+  - gRPC
+  - mTLS
+  - Policy
+  properties:
+  - type: Documentation
+    url: https://github.com/linkerd/linkerd2-proxy-api
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/authorization-policy/
+  - type: GitHubRepository
+    url: https://github.com/linkerd/linkerd2-proxy-api
+  - type: JSONSchema
+    url: json-schema/service-profile.json
+- aid: linkerd:multicluster-api
+  name: Linkerd Multicluster API
+  description: >-
+    The Linkerd Multicluster extension provides Kubernetes CRDs and a gateway component that enables transparent,
+    secure cross-cluster service communication. It uses mTLS to authenticate workloads across cluster
+    boundaries within a unified trust domain, allowing services in different clusters to communicate as
+    if they were local.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://linkerd.io/2-edge/features/multicluster/
+  properties:
+  - type: Documentation
+    url: https://linkerd.io/2-edge/features/multicluster/
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/multicluster/
+  tags:
+  - Federation
+  - Kubernetes
+  - mTLS
+  - Multicluster
+- aid: linkerd:linkerd-discovery-api
+  name: Linkerd Discovery API
+  description: API resource discovery
+  humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
+  baseURL: http://localhost:4191
+  tags:
+  - Discovery
+  properties:
+  - type: OpenAPI
+    url: openapi/linkerd-discovery-api-openapi.yml
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/proxy-metrics/
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/cli/viz/
+  - type: JSONSchema
+    url: json-schema/stat-summary.json
+  - type: JSONSchema
+    url: json-schema/edge.json
+  - type: JSONSchema
+    url: json-schema/gateway.json
+  - type: JSONLD
+    url: json-ld/linkerd-context.jsonld
+  - type: JSONSchema
+    url: json-schema/tap-event.json
+- aid: linkerd:linkerd-edges-api
+  name: Linkerd Edges API
+  description: Connection topology between resources
+  humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
+  baseURL: http://localhost:4191
+  tags:
+  - Edges
+  properties:
+  - type: OpenAPI
+    url: openapi/linkerd-edges-api-openapi.yml
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/proxy-metrics/
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/cli/viz/
+  - type: JSONSchema
+    url: json-schema/stat-summary.json
+  - type: JSONSchema
+    url: json-schema/edge.json
+  - type: JSONSchema
+    url: json-schema/gateway.json
+  - type: JSONLD
+    url: json-ld/linkerd-context.jsonld
+  - type: JSONSchema
+    url: json-schema/tap-event.json
+- aid: linkerd:linkerd-gateways-api
+  name: Linkerd Gateways API
+  description: Multicluster gateway metrics
+  humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
+  baseURL: http://localhost:4191
+  tags:
+  - Gateways
+  properties:
+  - type: OpenAPI
+    url: openapi/linkerd-gateways-api-openapi.yml
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/proxy-metrics/
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/cli/viz/
+  - type: JSONSchema
+    url: json-schema/stat-summary.json
+  - type: JSONSchema
+    url: json-schema/edge.json
+  - type: JSONSchema
+    url: json-schema/gateway.json
+  - type: JSONLD
+    url: json-ld/linkerd-context.jsonld
+  - type: JSONSchema
+    url: json-schema/tap-event.json
+- aid: linkerd:linkerd-health-api
+  name: Linkerd Health API
+  description: Health and readiness check endpoints
+  humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
+  baseURL: http://localhost:4191
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/linkerd-health-api-openapi.yml
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/proxy-metrics/
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/cli/viz/
+  - type: JSONSchema
+    url: json-schema/stat-summary.json
+  - type: JSONSchema
+    url: json-schema/edge.json
+  - type: JSONSchema
+    url: json-schema/gateway.json
+  - type: JSONLD
+    url: json-ld/linkerd-context.jsonld
+  - type: JSONSchema
+    url: json-schema/tap-event.json
+- aid: linkerd:linkerd-lifecycle-api
+  name: Linkerd Lifecycle API
+  description: Proxy lifecycle management endpoints
+  humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
+  baseURL: http://localhost:4191
+  tags:
+  - Lifecycle
+  properties:
+  - type: OpenAPI
+    url: openapi/linkerd-lifecycle-api-openapi.yml
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/proxy-metrics/
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/cli/viz/
+  - type: JSONSchema
+    url: json-schema/stat-summary.json
+  - type: JSONSchema
+    url: json-schema/edge.json
+  - type: JSONSchema
+    url: json-schema/gateway.json
+  - type: JSONLD
+    url: json-ld/linkerd-context.jsonld
+  - type: JSONSchema
+    url: json-schema/tap-event.json
+- aid: linkerd:linkerd-metrics-api
+  name: Linkerd Metrics API
+  description: Prometheus metrics endpoints
+  humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
+  baseURL: http://localhost:4191
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/linkerd-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/proxy-metrics/
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/cli/viz/
+  - type: JSONSchema
+    url: json-schema/stat-summary.json
+  - type: JSONSchema
+    url: json-schema/edge.json
+  - type: JSONSchema
+    url: json-schema/gateway.json
+  - type: JSONLD
+    url: json-ld/linkerd-context.jsonld
+  - type: JSONSchema
+    url: json-schema/tap-event.json
+- aid: linkerd:linkerd-routes-api
+  name: Linkerd Routes API
+  description: Per-route metrics
+  humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
+  baseURL: http://localhost:4191
+  tags:
+  - Routes
+  properties:
+  - type: OpenAPI
+    url: openapi/linkerd-routes-api-openapi.yml
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/proxy-metrics/
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/cli/viz/
+  - type: JSONSchema
+    url: json-schema/stat-summary.json
+  - type: JSONSchema
+    url: json-schema/edge.json
+  - type: JSONSchema
+    url: json-schema/gateway.json
+  - type: JSONLD
+    url: json-ld/linkerd-context.jsonld
+  - type: JSONSchema
+    url: json-schema/tap-event.json
+- aid: linkerd:linkerd-statistics-api
+  name: Linkerd Statistics API
+  description: Resource statistics and golden metrics
+  humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
+  baseURL: http://localhost:4191
+  tags:
+  - Statistics
+  properties:
+  - type: OpenAPI
+    url: openapi/linkerd-statistics-api-openapi.yml
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/proxy-metrics/
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/cli/viz/
+  - type: JSONSchema
+    url: json-schema/stat-summary.json
+  - type: JSONSchema
+    url: json-schema/edge.json
+  - type: JSONSchema
+    url: json-schema/gateway.json
+  - type: JSONLD
+    url: json-ld/linkerd-context.jsonld
+  - type: JSONSchema
+    url: json-schema/tap-event.json
+- aid: linkerd:linkerd-tap-api
+  name: Linkerd Tap API
+  description: Real-time traffic inspection
+  humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
+  baseURL: http://localhost:4191
+  tags:
+  - Tap
+  properties:
+  - type: OpenAPI
+    url: openapi/linkerd-tap-api-openapi.yml
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  - type: Reference
+    url: https://linkerd.io/2-edge/reference/proxy-metrics/
+  - type: Documentation
+    url: https://linkerd.io/2-edge/reference/cli/viz/
+  - type: JSONSchema
+    url: json-schema/stat-summary.json
+  - type: JSONSchema
+    url: json-schema/edge.json
+  - type: JSONSchema
+    url: json-schema/gateway.json
+  - type: JSONLD
+    url: json-ld/linkerd-context.jsonld
+  - type: JSONSchema
+    url: json-schema/tap-event.json
 common:
   - type: AgenticAccess
     url: agentic-access/linkerd-agentic-access.yml
