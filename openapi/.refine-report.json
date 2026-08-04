@@ -1,0 +1,30 @@
+{
+  "provider": "linkerd",
+  "sources": [
+    "linkerd-discovery-api-openapi.yml",
+    "linkerd-edges-api-openapi.yml",
+    "linkerd-gateways-api-openapi.yml",
+    "linkerd-health-api-openapi.yml",
+    "linkerd-lifecycle-api-openapi.yml",
+    "linkerd-metrics-api-openapi.yml",
+    "linkerd-routes-api-openapi.yml",
+    "linkerd-statistics-api-openapi.yml",
+    "linkerd-tap-api-openapi.yml"
+  ],
+  "outputs": [
+    "linkerd-discovery-api-openapi.yml",
+    "linkerd-edges-api-openapi.yml",
+    "linkerd-gateways-api-openapi.yml",
+    "linkerd-health-api-openapi.yml",
+    "linkerd-lifecycle-api-openapi.yml",
+    "linkerd-metrics-api-openapi.yml",
+    "linkerd-routes-api-openapi.yml",
+    "linkerd-statistics-api-openapi.yml",
+    "linkerd-tap-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
