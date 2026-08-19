@@ -1,0 +1,166 @@
+{
+  "item": [
+    {
+      "id": "3e06ee38-fa9f-4294-94f4-7ecb3ebdd65c",
+      "name": "Routes",
+      "description": {
+        "content": "Per-route metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bca55f04-1904-415f-9cd8-200fd1360151",
+          "name": "Linkerd Get top routes for a resource",
+          "request": {
+            "name": "Linkerd Get top routes for a resource",
+            "description": {
+              "content": "Returns per-route metrics for the specified resource. Requires a ServiceProfile to be defined for the service receiving requests. This powers the linkerd viz routes command.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "top-routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fb357b4e-38cf-41da-abd3-bcac11757cc8",
+              "name": "Top routes response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "top-routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": {\n    \"routes\": [\n      {\n        \"rows\": [\n          {\n            \"route\": \"string\",\n            \"time_window\": \"string\",\n            \"authority\": \"string\",\n            \"stats\": {\n              \"success_count\": 3420,\n              \"failure_count\": 6106,\n              \"latency_ms_p50\": 4907.412563261755,\n              \"latency_ms_p95\": 1503.7321656715574,\n              \"latency_ms_p99\": 8145.044924533678,\n              \"actual_success_count\": 5491,\n              \"actual_failure_count\": 5130\n            }\n          },\n          {\n            \"route\": \"string\",\n            \"time_window\": \"string\",\n            \"authority\": \"string\",\n            \"stats\": {\n              \"success_count\": 3519,\n              \"failure_count\": 4808,\n              \"latency_ms_p50\": 8157.523720305091,\n              \"latency_ms_p95\": 3794.866577837229,\n              \"latency_ms_p99\": 8499.020996967109,\n              \"actual_success_count\": 7053,\n              \"actual_failure_count\": 3338\n            }\n          }\n        ]\n      },\n      {\n        \"rows\": [\n          {\n            \"route\": \"string\",\n            \"time_window\": \"string\",\n            \"authority\": \"string\",\n            \"stats\": {\n              \"success_count\": 2176,\n              \"failure_count\": 1086,\n              \"latency_ms_p50\": 4168.365975459198,\n              \"latency_ms_p95\": 2154.597818830132,\n              \"latency_ms_p99\": 5963.867826345251,\n              \"actual_success_count\": 2723,\n              \"actual_failure_count\": 4139\n            }\n          },\n          {\n            \"route\": \"string\",\n            \"time_window\": \"string\",\n            \"authority\": \"string\",\n            \"stats\": {\n              \"success_count\": 8949,\n              \"failure_count\": 240,\n              \"latency_ms_p50\": 40.212043523703,\n              \"latency_ms_p95\": 1598.3160964572185,\n              \"latency_ms_p99\": 6580.986536916242,\n              \"actual_success_count\": 2472,\n              \"actual_failure_count\": 2893\n            }\n          }\n        ]\n      }\n    ]\n  },\n  \"error\": {\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bedc123e-c3ac-4d22-b239-9d7c2adc0530",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "top-routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:4191",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7eeb0e74-5040-4996-9ab0-084dbf3c594e",
+    "name": "Linkerd Proxy Admin Discovery Routes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
+      "type": "text/plain"
+    }
+  }
+}

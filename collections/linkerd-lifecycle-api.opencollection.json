@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Linkerd Proxy Admin Discovery Lifecycle API",
+    "version": "2.x"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lifecycle",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Initiate proxy shutdown",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:4191/shutdown"
+          },
+          "docs": "Triggers a graceful shutdown of the Linkerd proxy. This endpoint is used during pod termination to ensure the proxy drains connections before exiting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

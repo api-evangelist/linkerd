@@ -1,0 +1,201 @@
+{
+  "item": [
+    {
+      "id": "ba0f1c74-c01e-4b93-a8e8-2fa013e910c5",
+      "name": "Health",
+      "description": {
+        "content": "Health and readiness check endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0ad2d61b-2739-4c01-b617-79cdc846365a",
+          "name": "Linkerd Proxy readiness check",
+          "request": {
+            "name": "Linkerd Proxy readiness check",
+            "description": {
+              "content": "Returns the readiness status of the Linkerd proxy. Used by Kubernetes as a readiness probe to determine if the proxy is ready to accept traffic.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ready"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6267b7a5-17c2-457e-b011-8a7c6498d0f1",
+              "name": "Proxy is ready",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ready"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "88dbda75-1964-4784-9bf1-8c869f2ad915",
+              "name": "Proxy is not ready",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ready"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9eb6469-d208-4c5d-907c-f63d023b82d1",
+          "name": "Linkerd Proxy liveness check",
+          "request": {
+            "name": "Linkerd Proxy liveness check",
+            "description": {
+              "content": "Returns the liveness status of the Linkerd proxy. Used by Kubernetes as a liveness probe to determine if the proxy process is alive.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "live"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c2cc3a2-5c98-4cc2-89a7-601f1c0ffb58",
+              "name": "Proxy is alive",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "live"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:4191",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "72cf1447-2787-434c-951d-217078920362",
+    "name": "Linkerd Proxy Admin Discovery Health API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
+      "type": "text/plain"
+    }
+  }
+}

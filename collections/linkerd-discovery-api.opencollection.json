@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Linkerd Proxy Admin Discovery API",
+    "version": "2.x"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd List Tap API resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:4191/apis/tap.linkerd.io/v1alpha1"
+          },
+          "docs": "Returns the list of resources available in the tap.linkerd.io API group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

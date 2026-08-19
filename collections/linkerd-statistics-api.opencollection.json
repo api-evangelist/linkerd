@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Linkerd Proxy Admin Discovery Statistics API",
+    "version": "2.x"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Get stat summary for resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:4191/api/v1/stat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns aggregated metrics (request rate, success rate, latency percentiles) for the specified Kubernetes resources. This powers the linkerd viz stat command. Supports deployments, pods, namespaces, services, replicasets, statefulsets, daemonsets, cronjobs, jobs, and replicationcontrollers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

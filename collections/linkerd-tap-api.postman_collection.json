@@ -1,0 +1,402 @@
+{
+  "item": [
+    {
+      "id": "22385aa2-85b2-468b-8ebe-37a1aae487b1",
+      "name": "Tap",
+      "description": {
+        "content": "Real-time traffic inspection",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7db47228-8948-44df-b032-6a78dce02c4c",
+          "name": "Linkerd Tap traffic in a namespace",
+          "request": {
+            "name": "Linkerd Tap traffic in a namespace",
+            "description": {
+              "content": "Opens a streaming connection that returns real-time request and response metadata for traffic flowing through meshed pods in the specified namespace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "watch",
+                "namespaces",
+                ":namespace",
+                "tap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace to tap"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"target\": {\n    \"resource_type\": \"<string>\",\n    \"resource_name\": \"<string>\",\n    \"namespace\": \"<string>\"\n  },\n  \"match\": {\n    \"path\": \"<string>\",\n    \"method\": \"<string>\",\n    \"authority\": \"<string>\"\n  },\n  \"max_rps\": 100\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9638f31b-0ccf-4984-83d7-17e8836632d6",
+              "name": "Streaming tap events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "watch",
+                    "namespaces",
+                    ":namespace",
+                    "tap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace to tap"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": {\n    \"resource_type\": \"<string>\",\n    \"resource_name\": \"<string>\",\n    \"namespace\": \"<string>\"\n  },\n  \"match\": {\n    \"path\": \"<string>\",\n    \"method\": \"<string>\",\n    \"authority\": \"<string>\"\n  },\n  \"max_rps\": 100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"source\": {\n    \"ip\": \"string\",\n    \"port\": 7501\n  },\n  \"source_meta\": {\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"destination\": {\n    \"ip\": \"string\",\n    \"port\": 2166\n  },\n  \"destination_meta\": {\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"route_meta\": {\n    \"labels\": {\n      \"key_0\": \"string\"\n    }\n  },\n  \"proxy_direction\": \"OUTBOUND\",\n  \"request_init\": {\n    \"id\": \"string\",\n    \"method\": \"string\",\n    \"scheme\": \"string\",\n    \"authority\": \"string\",\n    \"path\": \"string\",\n    \"headers\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"response_init\": {\n    \"id\": \"string\",\n    \"http_status\": 6731,\n    \"latency_ns\": 5626,\n    \"headers\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"response_end\": {\n    \"id\": \"string\",\n    \"grpc_status\": 5239,\n    \"duration_ns\": 484,\n    \"response_bytes\": 7158\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01d151b8-d3bf-4836-a478-97c3eccfd14a",
+              "name": "Forbidden - insufficient RBAC permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "watch",
+                    "namespaces",
+                    ":namespace",
+                    "tap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace to tap"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": {\n    \"resource_type\": \"<string>\",\n    \"resource_name\": \"<string>\",\n    \"namespace\": \"<string>\"\n  },\n  \"match\": {\n    \"path\": \"<string>\",\n    \"method\": \"<string>\",\n    \"authority\": \"<string>\"\n  },\n  \"max_rps\": 100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c950f8e-938e-4ba5-832f-21c316f47146",
+          "name": "Linkerd Tap traffic for a specific resource",
+          "request": {
+            "name": "Linkerd Tap traffic for a specific resource",
+            "description": {
+              "content": "Opens a streaming connection that returns real-time request and response metadata for traffic flowing through the specified resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "watch",
+                "namespaces",
+                ":namespace",
+                ":resource_type",
+                ":resource_name",
+                "tap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resource_type",
+                  "description": "(Required) The Kubernetes resource type (e.g., deployments, pods)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resource_name",
+                  "description": "(Required) The name of the specific resource"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"target\": {\n    \"resource_type\": \"<string>\",\n    \"resource_name\": \"<string>\",\n    \"namespace\": \"<string>\"\n  },\n  \"match\": {\n    \"path\": \"<string>\",\n    \"method\": \"<string>\",\n    \"authority\": \"<string>\"\n  },\n  \"max_rps\": 100\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85b4dc90-6cb5-4207-95d2-860e82a9a373",
+              "name": "Streaming tap events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "watch",
+                    "namespaces",
+                    ":namespace",
+                    ":resource_type",
+                    ":resource_name",
+                    "tap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_type",
+                      "description": "(Required) The Kubernetes resource type (e.g., deployments, pods)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_name",
+                      "description": "(Required) The name of the specific resource"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": {\n    \"resource_type\": \"<string>\",\n    \"resource_name\": \"<string>\",\n    \"namespace\": \"<string>\"\n  },\n  \"match\": {\n    \"path\": \"<string>\",\n    \"method\": \"<string>\",\n    \"authority\": \"<string>\"\n  },\n  \"max_rps\": 100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"source\": {\n    \"ip\": \"string\",\n    \"port\": 7501\n  },\n  \"source_meta\": {\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"destination\": {\n    \"ip\": \"string\",\n    \"port\": 2166\n  },\n  \"destination_meta\": {\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"route_meta\": {\n    \"labels\": {\n      \"key_0\": \"string\"\n    }\n  },\n  \"proxy_direction\": \"OUTBOUND\",\n  \"request_init\": {\n    \"id\": \"string\",\n    \"method\": \"string\",\n    \"scheme\": \"string\",\n    \"authority\": \"string\",\n    \"path\": \"string\",\n    \"headers\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"response_init\": {\n    \"id\": \"string\",\n    \"http_status\": 6731,\n    \"latency_ns\": 5626,\n    \"headers\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  },\n  \"response_end\": {\n    \"id\": \"string\",\n    \"grpc_status\": 5239,\n    \"duration_ns\": 484,\n    \"response_bytes\": 7158\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff8de312-a485-45ae-8bcf-d209fc2e96ea",
+              "name": "Forbidden - insufficient RBAC permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "watch",
+                    "namespaces",
+                    ":namespace",
+                    ":resource_type",
+                    ":resource_name",
+                    "tap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_type",
+                      "description": "(Required) The Kubernetes resource type (e.g., deployments, pods)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource_name",
+                      "description": "(Required) The name of the specific resource"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target\": {\n    \"resource_type\": \"<string>\",\n    \"resource_name\": \"<string>\",\n    \"namespace\": \"<string>\"\n  },\n  \"match\": {\n    \"path\": \"<string>\",\n    \"method\": \"<string>\",\n    \"authority\": \"<string>\"\n  },\n  \"max_rps\": 100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:4191",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1808a928-40a2-4836-8e59-b74b70093ef7",
+    "name": "Linkerd Proxy Admin Discovery Tap API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
+      "type": "text/plain"
+    }
+  }
+}

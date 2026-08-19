@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Linkerd Proxy Admin Discovery Routes API",
+    "version": "2.x"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Get top routes for a resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:4191/api/v1/top-routes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns per-route metrics for the specified resource. Requires a ServiceProfile to be defined for the service receiving requests. This powers the linkerd viz routes command."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

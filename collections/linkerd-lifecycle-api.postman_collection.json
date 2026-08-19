@@ -1,0 +1,102 @@
+{
+  "item": [
+    {
+      "id": "3d3780b3-8fbe-4bef-884d-dff9ffb80cc0",
+      "name": "Lifecycle",
+      "description": {
+        "content": "Proxy lifecycle management endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f5cfe1b8-c171-4774-a37b-4bb4ea21386c",
+          "name": "Linkerd Initiate proxy shutdown",
+          "request": {
+            "name": "Linkerd Initiate proxy shutdown",
+            "description": {
+              "content": "Triggers a graceful shutdown of the Linkerd proxy. This endpoint is used during pod termination to ensure the proxy drains connections before exiting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shutdown"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1334ddb-b312-459f-a585-408ea29625d8",
+              "name": "Shutdown initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shutdown"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:4191",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "84117f97-7178-4b40-8ebe-2140fec4256e",
+    "name": "Linkerd Proxy Admin Discovery Lifecycle API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
+      "type": "text/plain"
+    }
+  }
+}

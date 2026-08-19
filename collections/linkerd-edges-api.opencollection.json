@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Linkerd Proxy Admin Discovery Edges API",
+    "version": "2.x"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Get edges between resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:4191/api/v1/edges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the observed edges (connections) between meshed resources, including information about mTLS status. This powers the linkerd viz edges command."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

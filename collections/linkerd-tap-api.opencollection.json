@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Linkerd Proxy Admin Discovery Tap API",
+    "version": "2.x"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tap",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Linkerd Tap traffic in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:4191/watch/namespaces/:namespace/tap",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace to tap"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Opens a streaming connection that returns real-time request and response metadata for traffic flowing through meshed pods in the specified namespace."
+        },
+        {
+          "info": {
+            "name": "Linkerd Tap traffic for a specific resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:4191/watch/namespaces/:namespace/:resource_type/:resource_name/tap",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace"
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes resource type (e.g., deployments, pods)"
+              },
+              {
+                "name": "resource_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the specific resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Opens a streaming connection that returns real-time request and response metadata for traffic flowing through the specified resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

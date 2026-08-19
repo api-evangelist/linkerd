@@ -1,0 +1,106 @@
+{
+  "item": [
+    {
+      "id": "bfc6d4a1-5775-4958-8841-ef79afe43b25",
+      "name": "Discovery",
+      "description": {
+        "content": "API resource discovery",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5433b66b-a393-414f-a6a2-63c42d662f90",
+          "name": "Linkerd List Tap API resources",
+          "request": {
+            "name": "Linkerd List Tap API resources",
+            "description": {
+              "content": "Returns the list of resources available in the tap.linkerd.io API group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "tap.linkerd.io",
+                "v1alpha1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7387b1d1-c8f5-4b04-992c-ccb3936ac43e",
+              "name": "API resource list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "tap.linkerd.io",
+                    "v1alpha1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"APIResourceList\",\n  \"apiVersion\": \"v1\",\n  \"groupVersion\": \"tap.linkerd.io/v1alpha1\",\n  \"resources\": [\n    {\n      \"name\": \"string\",\n      \"namespaced\": false,\n      \"kind\": \"string\",\n      \"verbs\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"namespaced\": false,\n      \"kind\": \"string\",\n      \"verbs\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:4191",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6a09e3af-3678-448c-bd24-01042fbbb870",
+    "name": "Linkerd Proxy Admin Discovery API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
+      "type": "text/plain"
+    }
+  }
+}

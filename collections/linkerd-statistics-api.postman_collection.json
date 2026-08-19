@@ -1,0 +1,166 @@
+{
+  "item": [
+    {
+      "id": "ebaafa40-e407-4f13-8820-e7069f76d577",
+      "name": "Statistics",
+      "description": {
+        "content": "Resource statistics and golden metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "88a5075e-dd4f-4f01-94f6-1a4ec036d63b",
+          "name": "Linkerd Get stat summary for resources",
+          "request": {
+            "name": "Linkerd Get stat summary for resources",
+            "description": {
+              "content": "Returns aggregated metrics (request rate, success rate, latency percentiles) for the specified Kubernetes resources. This powers the linkerd viz stat command. Supports deployments, pods, namespaces, services, replicasets, statefulsets, daemonsets, cronjobs, jobs, and replicationcontrollers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "stat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9351a190-6c2d-4016-bb6f-07b29df771d5",
+              "name": "Stat summary response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "stat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": {\n    \"stat_tables\": [\n      {\n        \"pod_group\": {\n          \"rows\": [\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 7353,\n              \"running_pod_count\": 4983,\n              \"failed_pod_count\": 3491,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 1986,\n              \"running_pod_count\": 9077,\n              \"failed_pod_count\": 9858,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"pod_group\": {\n          \"rows\": [\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 1154,\n              \"running_pod_count\": 3195,\n              \"failed_pod_count\": 5680,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 3945,\n              \"running_pod_count\": 6705,\n              \"failed_pod_count\": 1168,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"error\": {\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78035de5-fd32-4608-a433-b1d124194632",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "stat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:4191",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f8adfc11-14c1-41a5-8435-e19c94c64a1f",
+    "name": "Linkerd Proxy Admin Discovery Statistics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
+      "type": "text/plain"
+    }
+  }
+}
