@@ -28,7 +28,7 @@ tags:
 created: '2025-08-19'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/linkerd/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: linkerd:proxy-control-plane-api
   name: Linkerd Proxy Control Plane API
