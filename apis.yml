@@ -71,6 +71,11 @@ apis:
   - Federation
   - Kubernetes
   - mTLS
+  - Multi-Cluster
+  tags_raw:
+  - Federation
+  - Kubernetes
+  - mTLS
   - Multicluster
 - aid: linkerd:linkerd-discovery-api
   name: Linkerd Discovery API
@@ -286,6 +291,8 @@ apis:
   humanURL: https://linkerd.io/2-edge/reference/proxy-configuration/
   baseURL: http://localhost:4191
   tags:
+  - TAP
+  tags_raw:
   - Tap
   properties:
   - type: OpenAPI
