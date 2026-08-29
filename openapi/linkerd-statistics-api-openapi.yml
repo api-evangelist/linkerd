@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Linkerd Proxy Admin Discovery Statistics API
-  description: The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
+  title: Linkerd Viz Metrics Statistics API
+  description: The Linkerd Viz extension provides a metrics API that powers the linkerd viz CLI commands and the Linkerd dashboard. It queries Prometheus for golden metrics including request volume, success rate, and latency distributions for HTTP, HTTP/2, and gRPC traffic across meshed workloads.
   version: 2.x
   contact:
     name: Linkerd
@@ -10,8 +10,8 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-- url: http://localhost:4191
-  description: Linkerd proxy admin server (default port)
+- url: http://metrics-api.linkerd-viz.svc.cluster.local:8085
+  description: Linkerd Viz Metrics API service (in-cluster)
 tags:
 - name: Statistics
   description: Resource statistics and golden metrics
@@ -55,49 +55,6 @@ components:
           properties:
             error:
               type: string
-    Resource:
-      type: object
-      properties:
-        namespace:
-          type: string
-        type:
-          type: string
-        name:
-          type: string
-    BasicStats:
-      type: object
-      properties:
-        success_count:
-          type: integer
-          format: int64
-        failure_count:
-          type: integer
-          format: int64
-        latency_ms_p50:
-          type: number
-          format: double
-        latency_ms_p95:
-          type: number
-          format: double
-        latency_ms_p99:
-          type: number
-          format: double
-        actual_success_count:
-          type: integer
-          format: int64
-        actual_failure_count:
-          type: integer
-          format: int64
-    StatTable:
-      type: object
-      properties:
-        pod_group:
-          type: object
-          properties:
-            rows:
-              type: array
-              items:
-                $ref: '#/components/schemas/StatTableRow'
     StatTableRow:
       type: object
       properties:
@@ -117,18 +74,16 @@ components:
           $ref: '#/components/schemas/BasicStats'
         tcp_stats:
           $ref: '#/components/schemas/TcpStats'
-    TcpStats:
+    StatTable:
       type: object
       properties:
-        open_connections:
-          type: integer
-          format: int64
-        read_bytes_total:
-          type: integer
-          format: int64
-        write_bytes_total:
-          type: integer
-          format: int64
+        pod_group:
+          type: object
+          properties:
+            rows:
+              type: array
+              items:
+                $ref: '#/components/schemas/StatTableRow'
     StatSummaryRequest:
       type: object
       properties:
@@ -179,6 +134,51 @@ components:
           description: Include TCP-level statistics.
       required:
       - resource_type
+    Resource:
+      type: object
+      properties:
+        namespace:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+    TcpStats:
+      type: object
+      properties:
+        open_connections:
+          type: integer
+          format: int64
+        read_bytes_total:
+          type: integer
+          format: int64
+        write_bytes_total:
+          type: integer
+          format: int64
+    BasicStats:
+      type: object
+      properties:
+        success_count:
+          type: integer
+          format: int64
+        failure_count:
+          type: integer
+          format: int64
+        latency_ms_p50:
+          type: number
+          format: double
+        latency_ms_p95:
+          type: number
+          format: double
+        latency_ms_p99:
+          type: number
+          format: double
+        actual_success_count:
+          type: integer
+          format: int64
+        actual_failure_count:
+          type: integer
+          format: int64
 externalDocs:
-  description: Linkerd Proxy Configuration Reference
-  url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  description: Linkerd Viz CLI Reference
+  url: https://linkerd.io/2-edge/reference/cli/viz/

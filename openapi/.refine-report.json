@@ -1,30 +1,40 @@
 {
   "provider": "linkerd",
   "sources": [
-    "linkerd-discovery-api-openapi.yml",
-    "linkerd-edges-api-openapi.yml",
-    "linkerd-gateways-api-openapi.yml",
-    "linkerd-health-api-openapi.yml",
-    "linkerd-lifecycle-api-openapi.yml",
-    "linkerd-metrics-api-openapi.yml",
-    "linkerd-routes-api-openapi.yml",
-    "linkerd-statistics-api-openapi.yml",
-    "linkerd-tap-api-openapi.yml"
+    "_original/linkerd-proxy-admin-openapi.yml",
+    "_original/linkerd-tap-openapi.yml",
+    "_original/linkerd-viz-metrics-openapi.yml"
   ],
   "outputs": [
-    "linkerd-discovery-api-openapi.yml",
-    "linkerd-edges-api-openapi.yml",
-    "linkerd-gateways-api-openapi.yml",
     "linkerd-health-api-openapi.yml",
     "linkerd-lifecycle-api-openapi.yml",
     "linkerd-metrics-api-openapi.yml",
+    "linkerd-discovery-api-openapi.yml",
+    "linkerd-tap-api-openapi.yml",
+    "linkerd-edges-api-openapi.yml",
+    "linkerd-gateways-api-openapi.yml",
     "linkerd-routes-api-openapi.yml",
-    "linkerd-statistics-api-openapi.yml",
-    "linkerd-tap-api-openapi.yml"
+    "linkerd-statistics-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "linkerd-proxy-admin-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "linkerd-tap-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "linkerd-viz-metrics-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'Health' spans 2 source specs (linkerd-proxy-admin-openapi.yml, linkerd-viz-metrics-openapi.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "linkerd-discovery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "linkerd-edges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "linkerd-gateways-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "linkerd-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "linkerd-lifecycle-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "linkerd-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "linkerd-routes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "linkerd-statistics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "linkerd-tap-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

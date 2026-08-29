@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Linkerd Proxy Admin Discovery Tap API
-  description: The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.
-  version: 2.x
+  title: Linkerd Tap API
+  description: The Linkerd Tap API is a Kubernetes aggregated API server that provides real-time streaming access to requests flowing through the Linkerd service mesh. It allows live inspection of HTTP and gRPC traffic including headers, paths, response codes, and latency. Access is controlled via Kubernetes RBAC on the tap.linkerd.io API group.
+  version: v1alpha1
   contact:
     name: Linkerd
     url: https://linkerd.io/
@@ -10,8 +10,8 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-- url: http://localhost:4191
-  description: Linkerd proxy admin server (default port)
+- url: https://kubernetes.default.svc/apis/tap.linkerd.io/v1alpha1
+  description: Linkerd Tap aggregated API server (via Kubernetes API)
 tags:
 - name: Tap
   description: Real-time traffic inspection
@@ -88,15 +88,6 @@ paths:
           description: Forbidden - insufficient RBAC permissions
 components:
   schemas:
-    TcpAddress:
-      type: object
-      properties:
-        ip:
-          type: string
-          description: IP address
-        port:
-          type: integer
-          description: Port number
     TapEvent:
       type: object
       properties:
@@ -174,6 +165,15 @@ components:
             response_bytes:
               type: integer
               format: int64
+    TcpAddress:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: IP address
+        port:
+          type: integer
+          description: Port number
     TapByResourceRequest:
       type: object
       properties:
@@ -213,5 +213,5 @@ components:
           description: Maximum events per second
           default: 100
 externalDocs:
-  description: Linkerd Proxy Configuration Reference
-  url: https://linkerd.io/2-edge/reference/proxy-configuration/
+  description: Linkerd Viz CLI Reference
+  url: https://linkerd.io/2-edge/reference/cli/viz/
