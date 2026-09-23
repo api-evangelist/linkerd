@@ -88,6 +88,53 @@ paths:
           description: Forbidden - insufficient RBAC permissions
 components:
   schemas:
+    TcpAddress:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: IP address
+        port:
+          type: integer
+          description: Port number
+    TapByResourceRequest:
+      type: object
+      properties:
+        target:
+          type: object
+          description: Target resource to tap
+          properties:
+            resource_type:
+              type: string
+            resource_name:
+              type: string
+            namespace:
+              type: string
+        match:
+          type: object
+          description: Optional match criteria to filter events
+          properties:
+            path:
+              type: string
+              description: Regex to match request paths
+            method:
+              type: string
+              description: HTTP method to match
+              enum:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - HEAD
+              - OPTIONS
+            authority:
+              type: string
+              description: Authority (Host header) to match
+        max_rps:
+          type: number
+          description: Maximum events per second
+          default: 100
     TapEvent:
       type: object
       properties:
@@ -165,53 +212,6 @@ components:
             response_bytes:
               type: integer
               format: int64
-    TcpAddress:
-      type: object
-      properties:
-        ip:
-          type: string
-          description: IP address
-        port:
-          type: integer
-          description: Port number
-    TapByResourceRequest:
-      type: object
-      properties:
-        target:
-          type: object
-          description: Target resource to tap
-          properties:
-            resource_type:
-              type: string
-            resource_name:
-              type: string
-            namespace:
-              type: string
-        match:
-          type: object
-          description: Optional match criteria to filter events
-          properties:
-            path:
-              type: string
-              description: Regex to match request paths
-            method:
-              type: string
-              description: HTTP method to match
-              enum:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - PATCH
-              - HEAD
-              - OPTIONS
-            authority:
-              type: string
-              description: Authority (Host header) to match
-        max_rps:
-          type: number
-          description: Maximum events per second
-          default: 100
 externalDocs:
   description: Linkerd Viz CLI Reference
   url: https://linkerd.io/2-edge/reference/cli/viz/

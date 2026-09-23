@@ -40,22 +40,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    RouteTable:
-      type: object
-      properties:
-        rows:
-          type: array
-          items:
-            type: object
-            properties:
-              route:
-                type: string
-              time_window:
-                type: string
-              authority:
-                type: string
-              stats:
-                $ref: '#/components/schemas/BasicStats'
     TopRoutesRequest:
       type: object
       properties:
@@ -85,6 +69,22 @@ components:
           properties:
             error:
               type: string
+    RouteTable:
+      type: object
+      properties:
+        rows:
+          type: array
+          items:
+            type: object
+            properties:
+              route:
+                type: string
+              time_window:
+                type: string
+              authority:
+                type: string
+              stats:
+                $ref: '#/components/schemas/BasicStats'
     BasicStats:
       type: object
       properties:

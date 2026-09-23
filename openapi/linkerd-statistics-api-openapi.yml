@@ -40,21 +40,18 @@ paths:
           description: Internal server error
 components:
   schemas:
-    StatSummaryResponse:
+    TcpStats:
       type: object
       properties:
-        ok:
-          type: object
-          properties:
-            stat_tables:
-              type: array
-              items:
-                $ref: '#/components/schemas/StatTable'
-        error:
-          type: object
-          properties:
-            error:
-              type: string
+        open_connections:
+          type: integer
+          format: int64
+        read_bytes_total:
+          type: integer
+          format: int64
+        write_bytes_total:
+          type: integer
+          format: int64
     StatTableRow:
       type: object
       properties:
@@ -74,16 +71,30 @@ components:
           $ref: '#/components/schemas/BasicStats'
         tcp_stats:
           $ref: '#/components/schemas/TcpStats'
-    StatTable:
+    Resource:
       type: object
       properties:
-        pod_group:
+        namespace:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+    StatSummaryResponse:
+      type: object
+      properties:
+        ok:
           type: object
           properties:
-            rows:
+            stat_tables:
               type: array
               items:
-                $ref: '#/components/schemas/StatTableRow'
+                $ref: '#/components/schemas/StatTable'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
     StatSummaryRequest:
       type: object
       properties:
@@ -134,27 +145,6 @@ components:
           description: Include TCP-level statistics.
       required:
       - resource_type
-    Resource:
-      type: object
-      properties:
-        namespace:
-          type: string
-        type:
-          type: string
-        name:
-          type: string
-    TcpStats:
-      type: object
-      properties:
-        open_connections:
-          type: integer
-          format: int64
-        read_bytes_total:
-          type: integer
-          format: int64
-        write_bytes_total:
-          type: integer
-          format: int64
     BasicStats:
       type: object
       properties:
@@ -179,6 +169,16 @@ components:
         actual_failure_count:
           type: integer
           format: int64
+    StatTable:
+      type: object
+      properties:
+        pod_group:
+          type: object
+          properties:
+            rows:
+              type: array
+              items:
+                $ref: '#/components/schemas/StatTableRow'
 externalDocs:
   description: Linkerd Viz CLI Reference
   url: https://linkerd.io/2-edge/reference/cli/viz/

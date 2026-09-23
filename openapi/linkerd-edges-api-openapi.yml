@@ -40,6 +40,21 @@ paths:
           description: Internal server error
 components:
   schemas:
+    EdgesResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            edges:
+              type: array
+              items:
+                $ref: '#/components/schemas/Edge'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
     EdgesRequest:
       type: object
       properties:
@@ -49,6 +64,15 @@ components:
           type: string
       required:
       - resource_type
+    Resource:
+      type: object
+      properties:
+        namespace:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
     Edge:
       type: object
       properties:
@@ -65,30 +89,6 @@ components:
         no_identity_msg:
           type: string
           description: Reason for missing mTLS identity
-    Resource:
-      type: object
-      properties:
-        namespace:
-          type: string
-        type:
-          type: string
-        name:
-          type: string
-    EdgesResponse:
-      type: object
-      properties:
-        ok:
-          type: object
-          properties:
-            edges:
-              type: array
-              items:
-                $ref: '#/components/schemas/Edge'
-        error:
-          type: object
-          properties:
-            error:
-              type: string
 externalDocs:
   description: Linkerd Viz CLI Reference
   url: https://linkerd.io/2-edge/reference/cli/viz/

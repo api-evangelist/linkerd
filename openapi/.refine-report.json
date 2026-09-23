@@ -24,7 +24,8 @@
     "linkerd-proxy-admin-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "linkerd-tap-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "linkerd-viz-metrics-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Health' spans 2 source specs (linkerd-proxy-admin-openapi.yml, linkerd-viz-metrics-openapi.yml): per-path servers applied"
+    "tag 'Health' spans 2 source specs (linkerd-proxy-admin-openapi.yml, linkerd-viz-metrics-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "linkerd-discovery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
