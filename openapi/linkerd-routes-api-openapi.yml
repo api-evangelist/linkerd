@@ -40,20 +40,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    TopRoutesRequest:
-      type: object
-      properties:
-        resource_type:
-          type: string
-        resource_name:
-          type: string
-        namespace:
-          type: string
-        time_window:
-          type: string
-          default: 1m
-      required:
-      - resource_type
     TopRoutesResponse:
       type: object
       properties:
@@ -69,22 +55,6 @@ components:
           properties:
             error:
               type: string
-    RouteTable:
-      type: object
-      properties:
-        rows:
-          type: array
-          items:
-            type: object
-            properties:
-              route:
-                type: string
-              time_window:
-                type: string
-              authority:
-                type: string
-              stats:
-                $ref: '#/components/schemas/BasicStats'
     BasicStats:
       type: object
       properties:
@@ -109,6 +79,36 @@ components:
         actual_failure_count:
           type: integer
           format: int64
+    RouteTable:
+      type: object
+      properties:
+        rows:
+          type: array
+          items:
+            type: object
+            properties:
+              route:
+                type: string
+              time_window:
+                type: string
+              authority:
+                type: string
+              stats:
+                $ref: '#/components/schemas/BasicStats'
+    TopRoutesRequest:
+      type: object
+      properties:
+        resource_type:
+          type: string
+        resource_name:
+          type: string
+        namespace:
+          type: string
+        time_window:
+          type: string
+          default: 1m
+      required:
+      - resource_type
 externalDocs:
   description: Linkerd Viz CLI Reference
   url: https://linkerd.io/2-edge/reference/cli/viz/

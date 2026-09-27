@@ -40,61 +40,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    TcpStats:
-      type: object
-      properties:
-        open_connections:
-          type: integer
-          format: int64
-        read_bytes_total:
-          type: integer
-          format: int64
-        write_bytes_total:
-          type: integer
-          format: int64
-    StatTableRow:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/Resource'
-        time_window:
-          type: string
-        status:
-          type: string
-        meshed_pod_count:
-          type: integer
-        running_pod_count:
-          type: integer
-        failed_pod_count:
-          type: integer
-        stats:
-          $ref: '#/components/schemas/BasicStats'
-        tcp_stats:
-          $ref: '#/components/schemas/TcpStats'
-    Resource:
-      type: object
-      properties:
-        namespace:
-          type: string
-        type:
-          type: string
-        name:
-          type: string
-    StatSummaryResponse:
-      type: object
-      properties:
-        ok:
-          type: object
-          properties:
-            stat_tables:
-              type: array
-              items:
-                $ref: '#/components/schemas/StatTable'
-        error:
-          type: object
-          properties:
-            error:
-              type: string
     StatSummaryRequest:
       type: object
       properties:
@@ -169,6 +114,30 @@ components:
         actual_failure_count:
           type: integer
           format: int64
+    StatSummaryResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            stat_tables:
+              type: array
+              items:
+                $ref: '#/components/schemas/StatTable'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
+    Resource:
+      type: object
+      properties:
+        namespace:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
     StatTable:
       type: object
       properties:
@@ -179,6 +148,37 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/StatTableRow'
+    StatTableRow:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/Resource'
+        time_window:
+          type: string
+        status:
+          type: string
+        meshed_pod_count:
+          type: integer
+        running_pod_count:
+          type: integer
+        failed_pod_count:
+          type: integer
+        stats:
+          $ref: '#/components/schemas/BasicStats'
+        tcp_stats:
+          $ref: '#/components/schemas/TcpStats'
+    TcpStats:
+      type: object
+      properties:
+        open_connections:
+          type: integer
+          format: int64
+        read_bytes_total:
+          type: integer
+          format: int64
+        write_bytes_total:
+          type: integer
+          format: int64
 externalDocs:
   description: Linkerd Viz CLI Reference
   url: https://linkerd.io/2-edge/reference/cli/viz/
