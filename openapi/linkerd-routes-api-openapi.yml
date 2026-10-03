@@ -40,21 +40,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    TopRoutesResponse:
-      type: object
-      properties:
-        ok:
-          type: object
-          properties:
-            routes:
-              type: array
-              items:
-                $ref: '#/components/schemas/RouteTable'
-        error:
-          type: object
-          properties:
-            error:
-              type: string
     BasicStats:
       type: object
       properties:
@@ -79,6 +64,21 @@ components:
         actual_failure_count:
           type: integer
           format: int64
+    TopRoutesResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            routes:
+              type: array
+              items:
+                $ref: '#/components/schemas/RouteTable'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
     RouteTable:
       type: object
       properties:

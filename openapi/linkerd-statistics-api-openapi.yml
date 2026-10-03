@@ -40,6 +40,64 @@ paths:
           description: Internal server error
 components:
   schemas:
+    Resource:
+      type: object
+      properties:
+        namespace:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+    StatTable:
+      type: object
+      properties:
+        pod_group:
+          type: object
+          properties:
+            rows:
+              type: array
+              items:
+                $ref: '#/components/schemas/StatTableRow'
+    BasicStats:
+      type: object
+      properties:
+        success_count:
+          type: integer
+          format: int64
+        failure_count:
+          type: integer
+          format: int64
+        latency_ms_p50:
+          type: number
+          format: double
+        latency_ms_p95:
+          type: number
+          format: double
+        latency_ms_p99:
+          type: number
+          format: double
+        actual_success_count:
+          type: integer
+          format: int64
+        actual_failure_count:
+          type: integer
+          format: int64
+    StatSummaryResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            stat_tables:
+              type: array
+              items:
+                $ref: '#/components/schemas/StatTable'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
     StatSummaryRequest:
       type: object
       properties:
@@ -90,64 +148,6 @@ components:
           description: Include TCP-level statistics.
       required:
       - resource_type
-    BasicStats:
-      type: object
-      properties:
-        success_count:
-          type: integer
-          format: int64
-        failure_count:
-          type: integer
-          format: int64
-        latency_ms_p50:
-          type: number
-          format: double
-        latency_ms_p95:
-          type: number
-          format: double
-        latency_ms_p99:
-          type: number
-          format: double
-        actual_success_count:
-          type: integer
-          format: int64
-        actual_failure_count:
-          type: integer
-          format: int64
-    StatSummaryResponse:
-      type: object
-      properties:
-        ok:
-          type: object
-          properties:
-            stat_tables:
-              type: array
-              items:
-                $ref: '#/components/schemas/StatTable'
-        error:
-          type: object
-          properties:
-            error:
-              type: string
-    Resource:
-      type: object
-      properties:
-        namespace:
-          type: string
-        type:
-          type: string
-        name:
-          type: string
-    StatTable:
-      type: object
-      properties:
-        pod_group:
-          type: object
-          properties:
-            rows:
-              type: array
-              items:
-                $ref: '#/components/schemas/StatTableRow'
     StatTableRow:
       type: object
       properties:

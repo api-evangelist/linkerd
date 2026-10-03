@@ -40,14 +40,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    GatewaysRequest:
-      type: object
-      properties:
-        time_window:
-          type: string
-          default: 1m
-        gateway_namespace:
-          type: string
     GatewaysResponse:
       type: object
       properties:
@@ -83,6 +75,14 @@ components:
           properties:
             error:
               type: string
+    GatewaysRequest:
+      type: object
+      properties:
+        time_window:
+          type: string
+          default: 1m
+        gateway_namespace:
+          type: string
 externalDocs:
   description: Linkerd Viz CLI Reference
   url: https://linkerd.io/2-edge/reference/cli/viz/
