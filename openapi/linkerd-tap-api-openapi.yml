@@ -165,6 +165,15 @@ components:
             response_bytes:
               type: integer
               format: int64
+    TcpAddress:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: IP address
+        port:
+          type: integer
+          description: Port number
     TapByResourceRequest:
       type: object
       properties:
@@ -203,15 +212,6 @@ components:
           type: number
           description: Maximum events per second
           default: 100
-    TcpAddress:
-      type: object
-      properties:
-        ip:
-          type: string
-          description: IP address
-        port:
-          type: integer
-          description: Port number
 externalDocs:
   description: Linkerd Viz CLI Reference
   url: https://linkerd.io/2-edge/reference/cli/viz/

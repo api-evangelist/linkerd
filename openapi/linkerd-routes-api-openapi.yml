@@ -79,6 +79,20 @@ components:
           properties:
             error:
               type: string
+    TopRoutesRequest:
+      type: object
+      properties:
+        resource_type:
+          type: string
+        resource_name:
+          type: string
+        namespace:
+          type: string
+        time_window:
+          type: string
+          default: 1m
+      required:
+      - resource_type
     RouteTable:
       type: object
       properties:
@@ -95,20 +109,6 @@ components:
                 type: string
               stats:
                 $ref: '#/components/schemas/BasicStats'
-    TopRoutesRequest:
-      type: object
-      properties:
-        resource_type:
-          type: string
-        resource_name:
-          type: string
-        namespace:
-          type: string
-        time_window:
-          type: string
-          default: 1m
-      required:
-      - resource_type
 externalDocs:
   description: Linkerd Viz CLI Reference
   url: https://linkerd.io/2-edge/reference/cli/viz/
