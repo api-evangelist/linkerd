@@ -331,6 +331,12 @@ apis:
   - type: JSONSchema
     url: json-schema/tap-event.json
 common:
+  - type: Plans
+    url: plans/linkerd-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/linkerd-rate-limits.yml
+  - type: FinOps
+    url: finops/linkerd-finops.yml
   - type: CapabilityMap
     url: capabilities/linkerd-capability-edges.yml
     name: Linkerd Business Capability Map
