@@ -131,3 +131,52 @@ plans:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - compute
+  - negotiated
+  plans:
+  - name: Linkerd (Open Source)
+    access: freemium
+    model: subscription
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - per-use
+  - name: Buoyant Enterprise for Linkerd — Free
+    access: freemium
+    model: subscription
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - per-use
+  - name: Buoyant Enterprise for Linkerd — Basic
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - negotiated
+    periods:
+    - year
+  - name: Buoyant Enterprise for Linkerd — Premium
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - negotiated
+    periods:
+    - year
+  - name: Buoyant Enterprise for Linkerd — Strategic
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
