@@ -56,21 +56,6 @@ components:
         no_identity_msg:
           type: string
           description: Reason for missing mTLS identity
-    EdgesResponse:
-      type: object
-      properties:
-        ok:
-          type: object
-          properties:
-            edges:
-              type: array
-              items:
-                $ref: '#/components/schemas/Edge'
-        error:
-          type: object
-          properties:
-            error:
-              type: string
     Resource:
       type: object
       properties:
@@ -89,6 +74,21 @@ components:
           type: string
       required:
       - resource_type
+    EdgesResponse:
+      type: object
+      properties:
+        ok:
+          type: object
+          properties:
+            edges:
+              type: array
+              items:
+                $ref: '#/components/schemas/Edge'
+        error:
+          type: object
+          properties:
+            error:
+              type: string
 externalDocs:
   description: Linkerd Viz CLI Reference
   url: https://linkerd.io/2-edge/reference/cli/viz/
