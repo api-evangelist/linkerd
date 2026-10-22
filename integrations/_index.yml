@@ -79,3 +79,47 @@
     detected: '2026-10-19'
   status: not-a-workflow
   arazzo: null
+- slug: linkerd-homebrew
+  label: Homebrew
+  partner: homebrew
+  partner_name: Homebrew
+  category: official CLI (Homebrew)
+  type: register
+  channel: package-registry
+  evidence: https://formulae.brew.sh/formula/linkerd
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Homebrew (public package index)
+    spec_file: null
+    packages:
+    - name: linkerd
+      kind: formula
+      version: '2.20'
+      released: null
+      lapsed: false
+      page: https://formulae.brew.sh/formula/linkerd
+      cli: 'formula desc: Command-line utility to interact with linkerd'
+      repo_leg: domain:linkerd.io
+      publisher_leg: artifact-shared-github-org:linkerd
+      matched_by: domain
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: linkerd-digital-ocean-own
+  label: Digital Ocean (own)
+  partner: digital-ocean
+  partner_name: Digital Ocean (own)
+  category: Monitoring
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.digitalocean.com/apps/linkerd-beta
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
