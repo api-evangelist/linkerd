@@ -331,6 +331,8 @@ apis:
   - type: JSONSchema
     url: json-schema/tap-event.json
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/linkerd/overview
   - type: Plans
     url: plans/linkerd-plans-pricing.yml
   - type: RateLimits
