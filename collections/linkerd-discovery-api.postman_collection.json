@@ -1,106 +1,119 @@
 {
+  "info": {
+    "_postman_id": "00fd2c8d-d16a-48ba-8121-b6aa65c0cf6f",
+    "name": "Linkerd Tap Discovery API",
+    "description": "The Linkerd Tap API is a Kubernetes aggregated API server that provides real-time streaming access to requests flowing through the Linkerd service mesh. It allows live inspection of HTTP and gRPC traffic including headers, paths, response codes, and latency. Access is controlled via Kubernetes RBAC on the tap.linkerd.io API group.\n\nContact Support:\n Name: Linkerd",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:26:36.000Z",
+    "updatedAt": "2026-10-22T02:26:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-00fd2c8d-d16a-48ba-8121-b6aa65c0cf6f"
+  },
   "item": [
     {
-      "id": "bfc6d4a1-5775-4958-8841-ef79afe43b25",
-      "name": "Discovery",
-      "description": {
-        "content": "API resource discovery",
-        "type": "text/plain"
-      },
+      "name": "apis",
       "item": [
         {
-          "id": "5433b66b-a393-414f-a6a2-63c42d662f90",
-          "name": "Linkerd List Tap API resources",
-          "request": {
-            "name": "Linkerd List Tap API resources",
-            "description": {
-              "content": "Returns the list of resources available in the tap.linkerd.io API group.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "apis",
-                "tap.linkerd.io",
-                "v1alpha1"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "tap.linkerd.io",
+          "item": [
             {
-              "id": "7387b1d1-c8f5-4b04-992c-ccb3936ac43e",
-              "name": "API resource list",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "apis",
-                    "tap.linkerd.io",
-                    "v1alpha1"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "v1alpha1",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Linkerd List Tap API resources",
+                  "id": "1bc1b702-ba5f-488f-af5c-6929003c576d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/apis/tap.linkerd.io/v1alpha1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "apis",
+                        "tap.linkerd.io",
+                        "v1alpha1"
+                      ]
+                    },
+                    "description": "Returns the list of resources available in the tap.linkerd.io API group."
+                  },
+                  "response": [
+                    {
+                      "id": "c81a51b2-22f4-4116-b85d-0bc61518f968",
+                      "name": "API resource list",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/apis/tap.linkerd.io/v1alpha1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "apis",
+                            "tap.linkerd.io",
+                            "v1alpha1"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"kind\": \"<string>\",\n  \"apiVersion\": \"<string>\",\n  \"groupVersion\": \"<string>\",\n  \"resources\": [\n    {\n      \"name\": \"<string>\",\n      \"namespaced\": \"<boolean>\",\n      \"kind\": \"<string>\",\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespaced\": \"<boolean>\",\n      \"kind\": \"<string>\",\n      \"verbs\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:26:37.000Z",
+                      "updatedAt": "2026-10-22T02:26:37.000Z",
+                      "uid": "35240-c81a51b2-22f4-4116-b85d-0bc61518f968"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:26:37.000Z",
+                  "updatedAt": "2026-10-22T02:26:37.000Z",
+                  "uid": "35240-1bc1b702-ba5f-488f-af5c-6929003c576d"
                 }
               ],
-              "body": "{\n  \"kind\": \"APIResourceList\",\n  \"apiVersion\": \"v1\",\n  \"groupVersion\": \"tap.linkerd.io/v1alpha1\",\n  \"resources\": [\n    {\n      \"name\": \"string\",\n      \"namespaced\": false,\n      \"kind\": \"string\",\n      \"verbs\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"namespaced\": false,\n      \"kind\": \"string\",\n      \"verbs\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "3a9a8647-d1a7-45f1-b632-1f9f02bbbfee",
+              "createdAt": "2026-10-22T02:26:36.000Z",
+              "updatedAt": "2026-10-22T02:26:36.000Z",
+              "uid": "35240-3a9a8647-d1a7-45f1-b632-1f9f02bbbfee"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "9b7ce298-7d6c-4a2b-b2e2-525484830223",
+          "createdAt": "2026-10-22T02:26:36.000Z",
+          "updatedAt": "2026-10-22T02:26:36.000Z",
+          "uid": "35240-9b7ce298-7d6c-4a2b-b2e2-525484830223"
         }
       ],
-      "event": []
+      "id": "400f11e0-04f2-41fe-aac8-a5670f54e090",
+      "createdAt": "2026-10-22T02:26:36.000Z",
+      "updatedAt": "2026-10-22T02:26:36.000Z",
+      "uid": "35240-400f11e0-04f2-41fe-aac8-a5670f54e090"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:4191",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://kubernetes.default.svc/apis/tap.linkerd.io/v1alpha1"
     }
-  ],
-  "info": {
-    "_postman_id": "6a09e3af-3678-448c-bd24-01042fbbb870",
-    "name": "Linkerd Proxy Admin Discovery API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

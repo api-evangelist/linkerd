@@ -1,201 +1,201 @@
 {
+  "info": {
+    "_postman_id": "31235f77-12f3-467f-aab5-c67f6a97006a",
+    "name": "Linkerd Health API",
+    "description": "Operations tagged Health across 2 of this provider's published API definitions: linkerd-proxy-admin-openapi.yml, linkerd-viz-metrics-openapi.yml. Each path carries the servers of the definition it was published in.\n\nContact Support:\n Name: Linkerd",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:26:53.000Z",
+    "updatedAt": "2026-10-22T02:26:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-31235f77-12f3-467f-aab5-c67f6a97006a"
+  },
   "item": [
     {
-      "id": "ba0f1c74-c01e-4b93-a8e8-2fa013e910c5",
-      "name": "Health",
-      "description": {
-        "content": "Health and readiness check endpoints",
-        "type": "text/plain"
-      },
+      "name": "ready",
       "item": [
         {
-          "id": "0ad2d61b-2739-4c01-b617-79cdc846365a",
           "name": "Linkerd Proxy readiness check",
+          "id": "838e1437-b219-4425-ac41-237418b14813",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Linkerd Proxy readiness check",
-            "description": {
-              "content": "Returns the readiness status of the Linkerd proxy. Used by Kubernetes as a readiness probe to determine if the proxy is ready to accept traffic.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ready"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "text/plain"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/ready",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ready"
+              ]
+            },
+            "description": "Returns the readiness status of the Linkerd proxy. Used by Kubernetes as a readiness probe to determine if the proxy is ready to accept traffic."
           },
           "response": [
             {
-              "id": "6267b7a5-17c2-457e-b011-8a7c6498d0f1",
+              "id": "11488b30-a856-4e85-b7aa-58042ecfb8db",
               "name": "Proxy is ready",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "ready"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "text/plain"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/ready",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ready"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "text",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "text/plain"
                 }
               ],
-              "body": "string",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": "<string>",
+              "createdAt": "2026-10-22T02:26:53.000Z",
+              "updatedAt": "2026-10-22T02:26:53.000Z",
+              "uid": "35240-11488b30-a856-4e85-b7aa-58042ecfb8db"
             },
             {
-              "id": "88dbda75-1964-4784-9bf1-8c869f2ad915",
+              "id": "400e5907-d197-44f5-8671-419ff3f8bd78",
               "name": "Proxy is not ready",
               "originalRequest": {
+                "method": "GET",
+                "header": [],
                 "url": {
-                  "path": [
-                    "ready"
-                  ],
+                  "raw": "{{baseUrl}}/ready",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "GET",
-                "body": {}
+                  "path": [
+                    "ready"
+                  ]
+                }
               },
               "status": "Service Unavailable",
               "code": 503,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-22T02:26:53.000Z",
+              "updatedAt": "2026-10-22T02:26:53.000Z",
+              "uid": "35240-400e5907-d197-44f5-8671-419ff3f8bd78"
             }
           ],
-          "event": [],
+          "createdAt": "2026-10-22T02:26:53.000Z",
+          "updatedAt": "2026-10-22T02:26:53.000Z",
+          "uid": "35240-838e1437-b219-4425-ac41-237418b14813"
+        }
+      ],
+      "id": "a3f5fcc7-4ba5-48e3-ba94-d64a079cff15",
+      "createdAt": "2026-10-22T02:26:53.000Z",
+      "updatedAt": "2026-10-22T02:26:53.000Z",
+      "uid": "35240-a3f5fcc7-4ba5-48e3-ba94-d64a079cff15"
+    },
+    {
+      "name": "live",
+      "item": [
+        {
+          "name": "Linkerd Proxy liveness check",
+          "id": "d68bb40d-b416-4871-8cd7-9bbdaa0b1253",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d9eb6469-d208-4c5d-907c-f63d023b82d1",
-          "name": "Linkerd Proxy liveness check",
+          },
           "request": {
-            "name": "Linkerd Proxy liveness check",
-            "description": {
-              "content": "Returns the liveness status of the Linkerd proxy. Used by Kubernetes as a liveness probe to determine if the proxy process is alive.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "live"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "text/plain"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/live",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "live"
+              ]
+            },
+            "description": "Returns the liveness status of the Linkerd proxy. Used by Kubernetes as a liveness probe to determine if the proxy process is alive."
           },
           "response": [
             {
-              "id": "9c2cc3a2-5c98-4cc2-89a7-601f1c0ffb58",
+              "id": "b35620e4-971d-4437-b520-2fcdc35a470a",
               "name": "Proxy is alive",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "live"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "text/plain"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/live",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "live"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "text",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "text/plain"
                 }
               ],
-              "body": "string",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": "<string>",
+              "createdAt": "2026-10-22T02:26:53.000Z",
+              "updatedAt": "2026-10-22T02:26:53.000Z",
+              "uid": "35240-b35620e4-971d-4437-b520-2fcdc35a470a"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:26:53.000Z",
+          "updatedAt": "2026-10-22T02:26:53.000Z",
+          "uid": "35240-d68bb40d-b416-4871-8cd7-9bbdaa0b1253"
         }
       ],
-      "event": []
+      "id": "324b07bd-9bb2-4fdc-944e-2512c3ac095e",
+      "createdAt": "2026-10-22T02:26:53.000Z",
+      "updatedAt": "2026-10-22T02:26:53.000Z",
+      "uid": "35240-324b07bd-9bb2-4fdc-944e-2512c3ac095e"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:4191",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://localhost:4191"
     }
-  ],
-  "info": {
-    "_postman_id": "72cf1447-2787-434c-951d-217078920362",
-    "name": "Linkerd Proxy Admin Discovery Health API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

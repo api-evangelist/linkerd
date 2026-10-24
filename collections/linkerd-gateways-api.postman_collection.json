@@ -1,166 +1,191 @@
 {
+  "info": {
+    "_postman_id": "5f7b5ba1-f62c-4ffc-8d97-5762a5314cfd",
+    "name": "Linkerd Viz Metrics Gateways API",
+    "description": "The Linkerd Viz extension provides a metrics API that powers the linkerd viz CLI commands and the Linkerd dashboard. It queries Prometheus for golden metrics including request volume, success rate, and latency distributions for HTTP, HTTP/2, and gRPC traffic across meshed workloads.\n\nContact Support:\n Name: Linkerd",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:26:48.000Z",
+    "updatedAt": "2026-10-22T02:26:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5f7b5ba1-f62c-4ffc-8d97-5762a5314cfd"
+  },
   "item": [
     {
-      "id": "e01f6574-375d-4d2d-b822-34c76dc7212b",
-      "name": "Gateways",
-      "description": {
-        "content": "Multicluster gateway metrics",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "d1817510-fafd-4ce0-bcb6-a274364b981c",
-          "name": "Linkerd Get multicluster gateway metrics",
-          "request": {
-            "name": "Linkerd Get multicluster gateway metrics",
-            "description": {
-              "content": "Returns metrics for multicluster gateways including alive status, latency, and number of paired services.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "gateways"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"time_window\": \"1m\",\n  \"gateway_namespace\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "bc626121-ac3d-4b47-9f34-50f73e9ea64a",
-              "name": "Gateways response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "gateways"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"time_window\": \"1m\",\n  \"gateway_namespace\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "gateways",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Linkerd Get multicluster gateway metrics",
+                  "id": "fcf22e8e-9f14-4d1d-aeb4-a77762803972",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"time_window\": \"1m\",\n  \"gateway_namespace\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/gateways",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "gateways"
+                      ]
+                    },
+                    "description": "Returns metrics for multicluster gateways including alive status, latency, and number of paired services."
+                  },
+                  "response": [
+                    {
+                      "id": "e8f82d78-7826-4b81-bfaf-a8b8d0741a8d",
+                      "name": "Gateways response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"time_window\": \"1m\",\n  \"gateway_namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/gateways",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "gateways"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"ok\": {\n    \"gateways_table\": {\n      \"rows\": [\n        {\n          \"namespace\": \"<string>\",\n          \"name\": \"<string>\",\n          \"cluster_name\": \"<string>\",\n          \"paired_services\": \"<integer>\",\n          \"alive\": \"<boolean>\",\n          \"latency_ms_p50\": \"<number>\",\n          \"latency_ms_p95\": \"<number>\",\n          \"latency_ms_p99\": \"<number>\"\n        },\n        {\n          \"namespace\": \"<string>\",\n          \"name\": \"<string>\",\n          \"cluster_name\": \"<string>\",\n          \"paired_services\": \"<integer>\",\n          \"alive\": \"<boolean>\",\n          \"latency_ms_p50\": \"<number>\",\n          \"latency_ms_p95\": \"<number>\",\n          \"latency_ms_p99\": \"<number>\"\n        }\n      ]\n    }\n  },\n  \"error\": {\n    \"error\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:26:49.000Z",
+                      "updatedAt": "2026-10-22T02:26:49.000Z",
+                      "uid": "35240-e8f82d78-7826-4b81-bfaf-a8b8d0741a8d"
+                    },
+                    {
+                      "id": "09d8cd77-2a78-41c6-9a99-639c2ec2de15",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"time_window\": \"1m\",\n  \"gateway_namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/gateways",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "gateways"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:26:49.000Z",
+                      "updatedAt": "2026-10-22T02:26:49.000Z",
+                      "uid": "35240-09d8cd77-2a78-41c6-9a99-639c2ec2de15"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:26:49.000Z",
+                  "updatedAt": "2026-10-22T02:26:49.000Z",
+                  "uid": "35240-fcf22e8e-9f14-4d1d-aeb4-a77762803972"
                 }
               ],
-              "body": "{\n  \"ok\": {\n    \"gateways_table\": {\n      \"rows\": [\n        {\n          \"namespace\": \"string\",\n          \"name\": \"string\",\n          \"cluster_name\": \"string\",\n          \"paired_services\": 4455,\n          \"alive\": true,\n          \"latency_ms_p50\": 8724.666123051804,\n          \"latency_ms_p95\": 1859.7874372372414,\n          \"latency_ms_p99\": 6653.158336265304\n        },\n        {\n          \"namespace\": \"string\",\n          \"name\": \"string\",\n          \"cluster_name\": \"string\",\n          \"paired_services\": 9893,\n          \"alive\": true,\n          \"latency_ms_p50\": 8265.444374537463,\n          \"latency_ms_p95\": 5448.720682234184,\n          \"latency_ms_p99\": 1518.5323846141741\n        }\n      ]\n    }\n  },\n  \"error\": {\n    \"error\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9582ac2c-eb7d-470e-af53-1b4947b963b9",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "gateways"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"time_window\": \"1m\",\n  \"gateway_namespace\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "2b9cfbe5-718b-490e-9c1c-ad1cdf31f228",
+              "createdAt": "2026-10-22T02:26:49.000Z",
+              "updatedAt": "2026-10-22T02:26:49.000Z",
+              "uid": "35240-2b9cfbe5-718b-490e-9c1c-ad1cdf31f228"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ad5265b7-f5fe-4528-8598-5e3b44fef74e",
+          "createdAt": "2026-10-22T02:26:49.000Z",
+          "updatedAt": "2026-10-22T02:26:49.000Z",
+          "uid": "35240-ad5265b7-f5fe-4528-8598-5e3b44fef74e"
         }
       ],
-      "event": []
+      "id": "4630adce-caa3-43a8-b856-54fcc1aa637e",
+      "createdAt": "2026-10-22T02:26:49.000Z",
+      "updatedAt": "2026-10-22T02:26:49.000Z",
+      "uid": "35240-4630adce-caa3-43a8-b856-54fcc1aa637e"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:4191",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://metrics-api.linkerd-viz.svc.cluster.local:8085"
     }
-  ],
-  "info": {
-    "_postman_id": "7198210e-4ec2-4298-bd80-e94099b593de",
-    "name": "Linkerd Proxy Admin Discovery Gateways API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

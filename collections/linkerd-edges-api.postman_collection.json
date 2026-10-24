@@ -1,166 +1,191 @@
 {
+  "info": {
+    "_postman_id": "8a06d616-9de3-4651-aae7-9979ab4e0803",
+    "name": "Linkerd Viz Metrics Edges API",
+    "description": "The Linkerd Viz extension provides a metrics API that powers the linkerd viz CLI commands and the Linkerd dashboard. It queries Prometheus for golden metrics including request volume, success rate, and latency distributions for HTTP, HTTP/2, and gRPC traffic across meshed workloads.\n\nContact Support:\n Name: Linkerd",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:26:42.000Z",
+    "updatedAt": "2026-10-22T02:26:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8a06d616-9de3-4651-aae7-9979ab4e0803"
+  },
   "item": [
     {
-      "id": "322198e5-4cb2-4641-ae95-4837e31d4117",
-      "name": "Edges",
-      "description": {
-        "content": "Connection topology between resources",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "8407f566-6203-42a1-bec5-49e314e76fad",
-          "name": "Linkerd Get edges between resources",
-          "request": {
-            "name": "Linkerd Get edges between resources",
-            "description": {
-              "content": "Returns the observed edges (connections) between meshed resources, including information about mTLS status. This powers the linkerd viz edges command.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "edges"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"resource_type\": \"<string>\",\n  \"namespace\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "20e67f12-921d-4e7b-a53e-8fcf5fe36018",
-              "name": "Edges response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "edges"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"namespace\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "edges",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Linkerd Get edges between resources",
+                  "id": "af4e0a0e-3a97-464a-aab9-1671400d665d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"resource_type\": \"<string>\",\n  \"namespace\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/edges",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "edges"
+                      ]
+                    },
+                    "description": "Returns the observed edges (connections) between meshed resources, including information about mTLS status. This powers the linkerd viz edges command."
+                  },
+                  "response": [
+                    {
+                      "id": "519e4d4c-b591-43f2-adfc-28f48c6b3db6",
+                      "name": "Edges response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resource_type\": \"<string>\",\n  \"namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/edges",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "edges"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"ok\": {\n    \"edges\": [\n      {\n        \"src\": {\n          \"namespace\": \"<string>\",\n          \"type\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        \"dst\": {\n          \"namespace\": \"<string>\",\n          \"type\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        \"client_id\": \"<string>\",\n        \"server_id\": \"<string>\",\n        \"no_identity_msg\": \"<string>\"\n      },\n      {\n        \"src\": {\n          \"namespace\": \"<string>\",\n          \"type\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        \"dst\": {\n          \"namespace\": \"<string>\",\n          \"type\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        \"client_id\": \"<string>\",\n        \"server_id\": \"<string>\",\n        \"no_identity_msg\": \"<string>\"\n      }\n    ]\n  },\n  \"error\": {\n    \"error\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:26:43.000Z",
+                      "updatedAt": "2026-10-22T02:26:43.000Z",
+                      "uid": "35240-519e4d4c-b591-43f2-adfc-28f48c6b3db6"
+                    },
+                    {
+                      "id": "2798a560-73ef-4600-9c25-fdffd9b56811",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resource_type\": \"<string>\",\n  \"namespace\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/edges",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "edges"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:26:43.000Z",
+                      "updatedAt": "2026-10-22T02:26:43.000Z",
+                      "uid": "35240-2798a560-73ef-4600-9c25-fdffd9b56811"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:26:43.000Z",
+                  "updatedAt": "2026-10-22T02:26:43.000Z",
+                  "uid": "35240-af4e0a0e-3a97-464a-aab9-1671400d665d"
                 }
               ],
-              "body": "{\n  \"ok\": {\n    \"edges\": [\n      {\n        \"src\": {\n          \"namespace\": \"string\",\n          \"type\": \"string\",\n          \"name\": \"string\"\n        },\n        \"dst\": {\n          \"namespace\": \"string\",\n          \"type\": \"string\",\n          \"name\": \"string\"\n        },\n        \"client_id\": \"string\",\n        \"server_id\": \"string\",\n        \"no_identity_msg\": \"string\"\n      },\n      {\n        \"src\": {\n          \"namespace\": \"string\",\n          \"type\": \"string\",\n          \"name\": \"string\"\n        },\n        \"dst\": {\n          \"namespace\": \"string\",\n          \"type\": \"string\",\n          \"name\": \"string\"\n        },\n        \"client_id\": \"string\",\n        \"server_id\": \"string\",\n        \"no_identity_msg\": \"string\"\n      }\n    ]\n  },\n  \"error\": {\n    \"error\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2a3aa189-1496-4abf-a6e6-f5a6b56568ea",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "edges"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"namespace\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "d5072f6f-a05d-4049-a5c8-01fc92a24729",
+              "createdAt": "2026-10-22T02:26:42.000Z",
+              "updatedAt": "2026-10-22T02:26:42.000Z",
+              "uid": "35240-d5072f6f-a05d-4049-a5c8-01fc92a24729"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "43661093-39f7-4c86-8297-b467caf3f934",
+          "createdAt": "2026-10-22T02:26:42.000Z",
+          "updatedAt": "2026-10-22T02:26:42.000Z",
+          "uid": "35240-43661093-39f7-4c86-8297-b467caf3f934"
         }
       ],
-      "event": []
+      "id": "46ae0e30-763a-42b0-a8d4-54b2df347e18",
+      "createdAt": "2026-10-22T02:26:42.000Z",
+      "updatedAt": "2026-10-22T02:26:42.000Z",
+      "uid": "35240-46ae0e30-763a-42b0-a8d4-54b2df347e18"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:4191",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://metrics-api.linkerd-viz.svc.cluster.local:8085"
     }
-  ],
-  "info": {
-    "_postman_id": "98dbc1ce-7b45-4709-b43b-6d8523a300fd",
-    "name": "Linkerd Proxy Admin Discovery Edges API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

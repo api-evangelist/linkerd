@@ -1,166 +1,191 @@
 {
+  "info": {
+    "_postman_id": "179e077d-bc36-4811-a485-8898768af5fb",
+    "name": "Linkerd Viz Metrics Statistics API",
+    "description": "The Linkerd Viz extension provides a metrics API that powers the linkerd viz CLI commands and the Linkerd dashboard. It queries Prometheus for golden metrics including request volume, success rate, and latency distributions for HTTP, HTTP/2, and gRPC traffic across meshed workloads.\n\nContact Support:\n Name: Linkerd",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:27:17.000Z",
+    "updatedAt": "2026-10-22T02:27:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-179e077d-bc36-4811-a485-8898768af5fb"
+  },
   "item": [
     {
-      "id": "ebaafa40-e407-4f13-8820-e7069f76d577",
-      "name": "Statistics",
-      "description": {
-        "content": "Resource statistics and golden metrics",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "88a5075e-dd4f-4f01-94f6-1a4ec036d63b",
-          "name": "Linkerd Get stat summary for resources",
-          "request": {
-            "name": "Linkerd Get stat summary for resources",
-            "description": {
-              "content": "Returns aggregated metrics (request rate, success rate, latency percentiles) for the specified Kubernetes resources. This powers the linkerd viz stat command. Supports deployments, pods, namespaces, services, replicasets, statefulsets, daemonsets, cronjobs, jobs, and replicationcontrollers.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "stat"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "9351a190-6c2d-4016-bb6f-07b29df771d5",
-              "name": "Stat summary response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "stat"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "stat",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Linkerd Get stat summary for resources",
+                  "id": "88c55113-c9df-48e7-a4c6-beb404de2849",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"resource_type\": \"namespace\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/stat",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "stat"
+                      ]
+                    },
+                    "description": "Returns aggregated metrics (request rate, success rate, latency percentiles) for the specified Kubernetes resources. This powers the linkerd viz stat command. Supports deployments, pods, namespaces, services, replicasets, statefulsets, daemonsets, cronjobs, jobs, and replicationcontrollers."
+                  },
+                  "response": [
+                    {
+                      "id": "b2d73fa0-c6ef-4fcd-9467-620a04075fe6",
+                      "name": "Stat summary response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resource_type\": \"namespace\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/stat",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "stat"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"ok\": {\n    \"stat_tables\": [\n      {\n        \"pod_group\": {\n          \"rows\": [\n            {\n              \"resource\": {\n                \"namespace\": \"<string>\",\n                \"type\": \"<string>\",\n                \"name\": \"<string>\"\n              },\n              \"time_window\": \"<string>\",\n              \"status\": \"<string>\",\n              \"meshed_pod_count\": \"<integer>\",\n              \"running_pod_count\": \"<integer>\",\n              \"failed_pod_count\": \"<integer>\",\n              \"stats\": {\n                \"success_count\": \"<long>\",\n                \"failure_count\": \"<long>\",\n                \"latency_ms_p50\": \"<double>\",\n                \"latency_ms_p95\": \"<double>\",\n                \"latency_ms_p99\": \"<double>\",\n                \"actual_success_count\": \"<long>\",\n                \"actual_failure_count\": \"<long>\"\n              },\n              \"tcp_stats\": {\n                \"open_connections\": \"<long>\",\n                \"read_bytes_total\": \"<long>\",\n                \"write_bytes_total\": \"<long>\"\n              }\n            },\n            {\n              \"resource\": {\n                \"namespace\": \"<string>\",\n                \"type\": \"<string>\",\n                \"name\": \"<string>\"\n              },\n              \"time_window\": \"<string>\",\n              \"status\": \"<string>\",\n              \"meshed_pod_count\": \"<integer>\",\n              \"running_pod_count\": \"<integer>\",\n              \"failed_pod_count\": \"<integer>\",\n              \"stats\": {\n                \"success_count\": \"<long>\",\n                \"failure_count\": \"<long>\",\n                \"latency_ms_p50\": \"<double>\",\n                \"latency_ms_p95\": \"<double>\",\n                \"latency_ms_p99\": \"<double>\",\n                \"actual_success_count\": \"<long>\",\n                \"actual_failure_count\": \"<long>\"\n              },\n              \"tcp_stats\": {\n                \"open_connections\": \"<long>\",\n                \"read_bytes_total\": \"<long>\",\n                \"write_bytes_total\": \"<long>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"pod_group\": {\n          \"rows\": [\n            {\n              \"resource\": {\n                \"namespace\": \"<string>\",\n                \"type\": \"<string>\",\n                \"name\": \"<string>\"\n              },\n              \"time_window\": \"<string>\",\n              \"status\": \"<string>\",\n              \"meshed_pod_count\": \"<integer>\",\n              \"running_pod_count\": \"<integer>\",\n              \"failed_pod_count\": \"<integer>\",\n              \"stats\": {\n                \"success_count\": \"<long>\",\n                \"failure_count\": \"<long>\",\n                \"latency_ms_p50\": \"<double>\",\n                \"latency_ms_p95\": \"<double>\",\n                \"latency_ms_p99\": \"<double>\",\n                \"actual_success_count\": \"<long>\",\n                \"actual_failure_count\": \"<long>\"\n              },\n              \"tcp_stats\": {\n                \"open_connections\": \"<long>\",\n                \"read_bytes_total\": \"<long>\",\n                \"write_bytes_total\": \"<long>\"\n              }\n            },\n            {\n              \"resource\": {\n                \"namespace\": \"<string>\",\n                \"type\": \"<string>\",\n                \"name\": \"<string>\"\n              },\n              \"time_window\": \"<string>\",\n              \"status\": \"<string>\",\n              \"meshed_pod_count\": \"<integer>\",\n              \"running_pod_count\": \"<integer>\",\n              \"failed_pod_count\": \"<integer>\",\n              \"stats\": {\n                \"success_count\": \"<long>\",\n                \"failure_count\": \"<long>\",\n                \"latency_ms_p50\": \"<double>\",\n                \"latency_ms_p95\": \"<double>\",\n                \"latency_ms_p99\": \"<double>\",\n                \"actual_success_count\": \"<long>\",\n                \"actual_failure_count\": \"<long>\"\n              },\n              \"tcp_stats\": {\n                \"open_connections\": \"<long>\",\n                \"read_bytes_total\": \"<long>\",\n                \"write_bytes_total\": \"<long>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"error\": {\n    \"error\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:27:18.000Z",
+                      "updatedAt": "2026-10-22T02:27:18.000Z",
+                      "uid": "35240-b2d73fa0-c6ef-4fcd-9467-620a04075fe6"
+                    },
+                    {
+                      "id": "a30185a1-5e70-450a-b22a-18364ddac7b7",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"resource_type\": \"namespace\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/stat",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "stat"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:27:18.000Z",
+                      "updatedAt": "2026-10-22T02:27:18.000Z",
+                      "uid": "35240-a30185a1-5e70-450a-b22a-18364ddac7b7"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:27:18.000Z",
+                  "updatedAt": "2026-10-22T02:27:18.000Z",
+                  "uid": "35240-88c55113-c9df-48e7-a4c6-beb404de2849"
                 }
               ],
-              "body": "{\n  \"ok\": {\n    \"stat_tables\": [\n      {\n        \"pod_group\": {\n          \"rows\": [\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 7353,\n              \"running_pod_count\": 4983,\n              \"failed_pod_count\": 3491,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 1986,\n              \"running_pod_count\": 9077,\n              \"failed_pod_count\": 9858,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"pod_group\": {\n          \"rows\": [\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 1154,\n              \"running_pod_count\": 3195,\n              \"failed_pod_count\": 5680,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"resource\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"time_window\": \"string\",\n              \"status\": \"string\",\n              \"meshed_pod_count\": 3945,\n              \"running_pod_count\": 6705,\n              \"failed_pod_count\": 1168,\n              \"stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tcp_stats\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"error\": {\n    \"error\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "78035de5-fd32-4608-a433-b1d124194632",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "stat"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"resource_type\": \"<string>\",\n  \"resource_name\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"time_window\": \"1m\",\n  \"from_resource_type\": \"<string>\",\n  \"from_resource_name\": \"<string>\",\n  \"from_namespace\": \"<string>\",\n  \"to_resource_type\": \"<string>\",\n  \"to_resource_name\": \"<string>\",\n  \"to_namespace\": \"<string>\",\n  \"tcp_stats\": \"<boolean>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "9ea04995-c662-43d2-855d-ca31817b8c92",
+              "createdAt": "2026-10-22T02:27:18.000Z",
+              "updatedAt": "2026-10-22T02:27:18.000Z",
+              "uid": "35240-9ea04995-c662-43d2-855d-ca31817b8c92"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "e3ac26e6-249f-4085-8879-f424fb33ace8",
+          "createdAt": "2026-10-22T02:27:18.000Z",
+          "updatedAt": "2026-10-22T02:27:18.000Z",
+          "uid": "35240-e3ac26e6-249f-4085-8879-f424fb33ace8"
         }
       ],
-      "event": []
+      "id": "0662643a-81fe-4f26-8cdf-260496468ba8",
+      "createdAt": "2026-10-22T02:27:18.000Z",
+      "updatedAt": "2026-10-22T02:27:18.000Z",
+      "uid": "35240-0662643a-81fe-4f26-8cdf-260496468ba8"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://localhost:4191",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://metrics-api.linkerd-viz.svc.cluster.local:8085"
     }
-  ],
-  "info": {
-    "_postman_id": "f8adfc11-14c1-41a5-8435-e19c94c64a1f",
-    "name": "Linkerd Proxy Admin Discovery Statistics API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Linkerd proxy exposes an admin HTTP server on each meshed pod, providing health check endpoints, readiness probes, Prometheus-compatible metrics, and runtime diagnostic information. By default this server listens on port 4191.\n\nContact Support:\n Name: Linkerd",
-      "type": "text/plain"
-    }
-  }
+  ]
 }
